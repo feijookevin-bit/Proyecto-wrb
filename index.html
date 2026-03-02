@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuestra historia de pollitos juntos 🐥❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #0e0e0e;
+      color: #f2f2f2;
+      text-align: center;
+    }
+
+    header {
+      padding: 60px 20px;
+      background: linear-gradient(180deg, #0e0e0e, #1a1a1a);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.4em;
+      margin-bottom: 10px;
+      color: #ff6b81;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(255, 107, 129, 0.5);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      color: #ccc;
+      letter-spacing: 3px;
+    }
+
+    h3 {
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #161616;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 0 20px rgba(255,107,129,0.1);
+      animation: fadeUp 1.5s ease-in-out;
+    }
+
+    .contador {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #ffb3c1;
+      font-weight: 400;
+    }
+
+    .texto {
+      line-height: 1.7;
+      font-size: 1.05em;
+      color: #e0e0e0;
+      font-weight: 300;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .galeria img:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin: 40px 0 20px;
+      font-size: 0.9em;
+      color: #888;
+      font-weight: 300;
+    }
+
+    .corazon {
+      color: #ff6b81;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px rgba(255, 107, 129, 0.4); }
+      to { text-shadow: 0 0 30px rgba(255, 107, 129, 0.8); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Nuestra historia de pollitos juntos 🐥❤️</h1>
+    <h2>Kevin & Katherine</h2>
+  </header>
+
+  <div class="container">
+
+    <div class="card">
+      <h3>⏳ Nuestro tiempo juntos</h3>
+      <div class="contador" id="contador"></div>
+    </div>
+
+    <div class="card">
+      <h3>💌 Nuestra historia</h3>
+      <p class="texto">
+        Este espacio es solo para nosotros, para dejar plasmada nuestra historia, nuestros recuerdos y cada momento que hemos compartido juntos.
+        <br><br>
+        Gracias por cada risa, por cada abrazo, por cada momento bonito y también por cada historia que hemos escrito de la mano.
+        Eres una de las cosas más lindas de mi vida y agradezco todos los días por haber permitido entrelazar nuestros caminos
+        y escribir juntos una historia tan maravillosa.
+        <br><br>
+        Aquí quedará guardado todo lo nuestro, para volver a verlo cuantas veces queramos y recordar lo mucho que nos amamos. <span class="corazon">❤️</span>
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>📸 Nuestros recuerdos</h3>
+      <p style="color:#aaa;">plasmando cada instante.</p>
+      <div class="galeria" id="galeria">
+        <img src="Fotos/Foto1.jpg" alt="Recuerdo 1">
+        <img src="Fotos/Foto2.jpg" alt="Recuerdo 2">
+        <img src="Fotos/Foto3.jpg" alt="Recuerdo 3">
+        <img src="Fotos/Foto4.jpg" alt="Recuerdo 4">
+        <img src="fotos/foto5.jpg" alt="Recuerdo 5">
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Hecho con amor para mi pollito 🐥❤️
+  </footer>
+
+  <script>
+    const fechaInicio = new Date("2025-10-13T00:00:00");
+
+    function actualizarContador() {
+      const ahora = new Date();
+      const diferencia = ahora - fechaInicio;
+
+      const segundos = Math.floor(diferencia / 1000);
+      const dias = Math.floor(segundos / (60 * 60 * 24));
+
+      const horas = Math.floor((segundos % (60 * 60 * 24)) / (60 * 60));
+      const minutos = Math.floor((segundos % (60 * 60)) / 60);
+      const seg = Math.floor(segundos % 60);
+
+      document.getElementById("contador").innerHTML = 
+        `${dias} días, ${horas} horas, ${minutos} minutos y ${seg} segundos juntos 💖`;
+    }
+
+    setInterval(actualizarContador, 1000);
+    actualizarContador();
+  </script>
+
+</body>
+</html>
