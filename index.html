@@ -15,34 +15,25 @@
       background: #0e0e0e;
       color: #f2f2f2;
       text-align: center;
+      overflow-x: hidden;
     }
 
     header {
       padding: 60px 20px;
       background: linear-gradient(180deg, #0e0e0e, #1a1a1a);
-      animation: fadeIn 2s ease-in-out;
     }
 
     h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 3.4em;
-      margin-bottom: 10px;
       color: #ff6b81;
-      letter-spacing: 2px;
       text-shadow: 0 0 20px rgba(255, 107, 129, 0.5);
-      animation: glow 3s ease-in-out infinite alternate;
     }
 
     h2 {
       font-family: 'Playfair Display', serif;
-      font-weight: 500;
       color: #ccc;
       letter-spacing: 3px;
-    }
-
-    h3 {
-      font-weight: 500;
-      letter-spacing: 1px;
     }
 
     .container {
@@ -57,21 +48,16 @@
       padding: 20px;
       margin: 20px 0;
       box-shadow: 0 0 20px rgba(255,107,129,0.1);
-      animation: fadeUp 1.5s ease-in-out;
+      animation: fadeUp 1.2s ease;
     }
 
     .contador {
-      font-size: 1.2em;
-      margin-top: 10px;
       color: #ffb3c1;
-      font-weight: 400;
     }
 
     .texto {
       line-height: 1.7;
-      font-size: 1.05em;
       color: #e0e0e0;
-      font-weight: 300;
     }
 
     .galeria {
@@ -87,6 +73,8 @@
       object-fit: cover;
       border-radius: 10px;
       transition: transform 0.3s;
+      cursor: pointer;
+      animation: fadeIn 1s ease;
     }
 
     .galeria img:hover {
@@ -94,99 +82,149 @@
     }
 
     footer {
-      margin: 40px 0 20px;
-      font-size: 0.9em;
+      margin: 40px 0;
       color: #888;
-      font-weight: 300;
-    }
-
-    .corazon {
-      color: #ff6b81;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px rgba(255, 107, 129, 0.4); }
-      to { text-shadow: 0 0 30px rgba(255, 107, 129, 0.8); }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {opacity:0;}
+      to {opacity:1;}
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {opacity:0; transform: translateY(20px);}
+      to {opacity:1; transform: translateY(0);}
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Nuestra historia de pollitos juntos 🐥❤️</h1>
-    <h2>Kevin & Katherine</h2>
-  </header>
+<header>
+  <h1>Nuestra historia de pollitos juntos 🐥❤️</h1>
+  <h2>Kevin & Katherine</h2>
+</header>
 
-  <div class="container">
+<div class="container">
 
-    <div class="card">
-      <h3>⏳ Nuestro tiempo juntos</h3>
-      <div class="contador" id="contador"></div>
-    </div>
-
-    <div class="card">
-      <h3>💌 Nuestra historia</h3>
-      <p class="texto">
-        Este espacio es solo para nosotros, para dejar plasmada nuestra historia, nuestros recuerdos y cada momento que hemos compartido juntos.
-        <br><br>
-        Gracias por cada risa, por cada abrazo, por cada momento bonito y también por cada historia que hemos escrito de la mano.
-        Eres una de las cosas más lindas de mi vida y agradezco todos los días por haber permitido entrelazar nuestros caminos
-        y escribir juntos una historia tan maravillosa.
-        <br><br>
-        Aquí quedará guardado todo lo nuestro, para volver a verlo cuantas veces queramos y recordar lo mucho que nos amamos. <span class="corazon">❤️</span>
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>📸 Nuestros recuerdos</h3>
-      <p style="color:#aaa;">plasmando cada instante.</p>
-      <div class="galeria" id="galeria">
-        <img src="Fotos/Foto1.jpg" alt="Recuerdo 1">
-        <img src="Fotos/Foto2.jpg" alt="Recuerdo 2">
-        <img src="Fotos/Foto3.jpg" alt="Recuerdo 3">
-        <img src="Fotos/Foto4.jpg" alt="Recuerdo 4">
-        <img src="fotos/foto5.jpg" alt="Recuerdo 5">
-      </div>
-    </div>
-
+  <div class="card">
+    <h3>⏳ Nuestro tiempo juntos</h3>
+    <div class="contador" id="contador"></div>
   </div>
 
-  <footer>
-    Hecho con amor para mi pollito 🐥❤️
-  </footer>
+  <div class="card">
+    <h3>💌 Nuestra historia</h3>
+    <p class="texto">
+      Este espacio es solo para nosotros, para dejar plasmada nuestra historia...
+      <br><br>
+      Eres una de las cosas más lindas de mi vida 🐥❤️
+    </p>
+  </div>
 
-  <script>
-    const fechaInicio = new Date("2025-10-13T00:00:00");
+  <div class="card">
+    <h3>📸 Nuestros recuerdos</h3>
+    <div class="galeria" id="galeria"></div>
+  </div>
 
-    function actualizarContador() {
-      const ahora = new Date();
-      const diferencia = ahora - fechaInicio;
+</div>
 
-      const segundos = Math.floor(diferencia / 1000);
-      const dias = Math.floor(segundos / (60 * 60 * 24));
+<footer>
+  Hecho con amor para mi pollito 🐥❤️
+</footer>
 
-      const horas = Math.floor((segundos % (60 * 60 * 24)) / (60 * 60));
-      const minutos = Math.floor((segundos % (60 * 60)) / 60);
-      const seg = Math.floor(segundos % 60);
+<!-- Modal -->
+<div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center;">
+  <img id="modalImg" style="max-width:90%; max-height:90%; border-radius:10px;">
+</div>
 
-      document.getElementById("contador").innerHTML = 
-        `${dias} días, ${horas} horas, ${minutos} minutos y ${seg} segundos juntos 💖`;
+<!-- Música -->
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="toggleMusica()" style="position:fixed; bottom:20px; right:20px; background:#ff6b81; border:none; padding:10px 15px; border-radius:20px; color:white;">
+  🎶
+</button>
+
+<script>
+/* contador */
+const fechaInicio = new Date("2025-10-13T00:00:00");
+
+function actualizarContador() {
+  const ahora = new Date();
+  const diff = ahora - fechaInicio;
+
+  const dias = Math.floor(diff / (1000*60*60*24));
+  const horas = Math.floor((diff/(1000*60*60))%24);
+  const min = Math.floor((diff/(1000*60))%60);
+  const seg = Math.floor((diff/1000)%60);
+
+  document.getElementById("contador").innerHTML =
+    `${dias} días, ${horas} horas, ${min} minutos y ${seg} segundos 💖`;
+}
+
+setInterval(actualizarContador,1000);
+actualizarContador();
+
+/* música */
+const musica = document.getElementById("musica");
+let sonando = false;
+
+function toggleMusica(){
+  if(sonando){ musica.pause(); }
+  else{ musica.play(); }
+  sonando = !sonando;
+}
+
+/* galería automática */
+fetch('https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos')
+.then(res=>res.json())
+.then(data=>{
+  const galeria = document.getElementById('galeria');
+
+  data.forEach(file=>{
+    if(file.type==="file"){
+      const img = document.createElement('img');
+      img.src = file.download_url;
+
+      img.onclick = ()=>{
+        document.getElementById("modal").style.display="flex";
+        document.getElementById("modalImg").src=img.src;
+      };
+
+      galeria.appendChild(img);
     }
+  });
+});
 
-    setInterval(actualizarContador, 1000);
-    actualizarContador();
-  </script>
+/* cerrar modal */
+document.getElementById("modal").onclick=()=>{
+  document.getElementById("modal").style.display="none";
+};
+
+/* corazones */
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.innerHTML="💖";
+  heart.style.position="fixed";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.bottom="0";
+  heart.style.fontSize="20px";
+  heart.style.animation="subir 4s linear";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),4000);
+},500);
+
+</script>
+
+<style>
+@keyframes subir{
+  from{transform:translateY(0); opacity:1;}
+  to{transform:translateY(-100vh); opacity:0;}
+}
+</style>
 
 </body>
 </html>
