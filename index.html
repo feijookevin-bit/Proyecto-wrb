@@ -5,8 +5,7 @@
 <title>Nuestra historia 🐥❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fuentes -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -18,19 +17,33 @@ body {
   overflow-x: hidden;
 }
 
-header {
-  padding: 60px 20px;
-}
-
 h1 {
+  font-family: 'Playfair Display', serif;
   font-size: 2.8em;
   color: #ff6b81;
 }
 
-h2 {
-  color: #bbb;
+/* INTRO */
+#intro {
+  position: fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
+#introText {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6em;
+  opacity: 0;
+  transition: opacity 1s ease;
+  padding: 20px;
+}
+
+/* CONTENIDO */
 .container {
   max-width: 900px;
   margin: auto;
@@ -44,6 +57,7 @@ h2 {
   margin: 20px 0;
 }
 
+/* GALERIA */
 .galeria {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -56,11 +70,62 @@ h2 {
   object-fit: cover;
   border-radius: 10px;
   cursor: pointer;
+  transition: transform 0.3s;
 }
 
-footer {
-  margin: 40px 0;
-  color: #888;
+.galeria img:hover {
+  transform: scale(1.05);
+}
+
+/* MODAL */
+#modal {
+  display: none;
+  position: fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+}
+
+#modal img {
+  max-width:90%;
+  max-height:90%;
+}
+
+/* BOTON MUSICA */
+button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff6b81;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+}
+
+/* TE AMO FINAL */
+#teamo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5em;
+  color: #ff6b81;
+  margin-top: 10px;
+  text-shadow: 0 0 15px rgba(255,107,129,0.6);
+  animation: latido 2s infinite;
+}
+
+@keyframes latido {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* ANIMACION FLOTANTE */
+@keyframes subir {
+  from {transform: translateY(0); opacity:1;}
+  to {transform: translateY(-100vh); opacity:0;}
 }
 </style>
 </head>
@@ -68,27 +133,19 @@ footer {
 <body>
 
 <!-- INTRO -->
-<div id="intro" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; color:white; display:flex; justify-content:center; align-items:center; flex-direction:column; z-index:9999;">
-  <h1 id="introText" style="font-size:1.5em; padding:20px;"></h1>
+<div id="intro">
+  <h1 id="introText"></h1>
 </div>
 
 <header>
   <h1>Nuestra historia 🐥❤️</h1>
-  <h2>Kevin & Katherine</h2>
 </header>
 
 <div class="container">
 
   <div class="card">
-    <h3>⏳ Nuestro tiempo juntos</h3>
-    <div id="contador"></div>
-  </div>
-
-  <div class="card">
     <h3>💌 Nuestra historia</h3>
-    <p>
-      Este espacio es solo para nosotros… para guardar cada momento, cada risa y cada recuerdo juntos 💖
-    </p>
+    <p>Este espacio es solo para nosotros 💖</p>
   </div>
 
   <div class="card">
@@ -100,24 +157,23 @@ footer {
 
 <footer>
   Hecho con amor para mi pollito 🐥❤️
+  <div id="teamo">TE AMO ❤️</div>
 </footer>
 
 <!-- MODAL -->
-<div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center;">
-  <img id="modalImg" style="max-width:90%; max-height:90%;">
+<div id="modal">
+  <img id="modalImg">
 </div>
 
-<!-- MÚSICA -->
+<!-- MUSICA -->
 <audio id="musica" loop>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
-<button onclick="toggleMusica()" style="position:fixed; bottom:20px; right:20px; background:#ff6b81; border:none; padding:10px; border-radius:50%;">
-🎶
-</button>
+<button onclick="toggleMusica()">🎶</button>
 
 <script>
-/* INTRO */
+/* INTRO SUAVE */
 const textos = [
   "Hay historias que no se planean…",
   "pero llegan para cambiarlo todo…",
@@ -132,29 +188,20 @@ function mostrarTexto() {
     introText.style.opacity = 0;
 
     setTimeout(() => {
-      introText.innerHTML = textos[i];
+      introText.innerText = textos[i];
       introText.style.opacity = 1;
       i++;
+
       setTimeout(mostrarTexto, 2500);
-    }, 500);
+    }, 1000);
   } else {
     document.getElementById("intro").style.display = "none";
   }
 }
+
 mostrarTexto();
 
-/* CONTADOR */
-const fechaInicio = new Date("2025-10-13");
-
-setInterval(() => {
-  const ahora = new Date();
-  const diff = ahora - fechaInicio;
-
-  const dias = Math.floor(diff/(1000*60*60*24));
-  document.getElementById("contador").innerHTML = dias + " días juntos 💖";
-},1000);
-
-/* GALERÍA AUTOMÁTICA */
+/* GALERIA AUTOMATICA (GitHub) */
 fetch('https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos')
 .then(res=>res.json())
 .then(data=>{
@@ -175,41 +222,44 @@ fetch('https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos'
   });
 });
 
-/* CERRAR MODAL */
-document.getElementById("modal").onclick=()=>{
+/* MODAL */
+document.getElementById("modal").onclick = () => {
   document.getElementById("modal").style.display="none";
 };
 
-/* MÚSICA */
-let sonando=false;
-const musica=document.getElementById("musica");
+/* MUSICA */
+const musica = document.getElementById("musica");
 
 function toggleMusica(){
-  if(sonando){musica.pause();}
-  else{musica.play();}
-  sonando=!sonando;
+  if(musica.paused){
+    musica.play();
+  } else {
+    musica.pause();
+  }
 }
 
-/* CORAZONES */
+/* autoplay al tocar */
+document.body.addEventListener("click", () => {
+  musica.play();
+}, { once: true });
+
+/* CORAZONES + POLLITOS */
 setInterval(()=>{
-  const heart=document.createElement("div");
-  heart.innerHTML="💖";
-  heart.style.position="fixed";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.bottom="0";
-  heart.style.fontSize="20px";
-  heart.style.animation="subir 4s linear";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),4000);
+  let elemento = document.createElement("div");
+
+  elemento.innerText = Math.random() > 0.5 ? "💖" : "🐥";
+
+  elemento.style.position="fixed";
+  elemento.style.left=Math.random()*100+"%";
+  elemento.style.bottom="0";
+  elemento.style.fontSize=(20+Math.random()*20)+"px";
+  elemento.style.animation="subir 6s linear";
+
+  document.body.appendChild(elemento);
+
+  setTimeout(()=>elemento.remove(),6000);
 },500);
 </script>
-
-<style>
-@keyframes subir{
-  from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(-100vh);opacity:0;}
-}
-</style>
 
 </body>
 </html>
