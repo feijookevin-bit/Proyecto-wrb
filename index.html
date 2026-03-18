@@ -4,183 +4,71 @@
 <meta charset="UTF-8">
 <title>Nuestra historia 🐥❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Fuente para todo -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 body {
-  margin: 0;
-  font-family: 'Great Vibes', cursive;
+  margin:0;
+  font-family:'Great Vibes', cursive;
   background: linear-gradient(to bottom, #0e0e0e, #1a1a1a);
-  color: #ff6b81;
-  text-align: center;
-  overflow-x: hidden;
-  position: relative;
+  color:#ff6b81;
+  text-align:center;
+  overflow-x:hidden;
+  position:relative;
 }
 
 /* VIDEO DE FONDO */
 #video-bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  opacity: 0.25;
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  z-index:-2;
+  opacity:0.25;
 }
 
 /* TITULO Y SUBTITULO */
-.titulo-principal {
-  font-size: 3em;
-  color: #ff6b81;
-  margin-top: 40px;
-}
-
-.subtitulo {
-  font-size: 2em;
-  color: #ff6b81;
-  margin-top: 10px;
-  opacity: 0;
-  animation: fadeIn 2s forwards;
-}
-
-.texto-presentacion {
-  font-size: 1.8em;
-  margin-top: 15px;
-  color: #ff6b81;
-}
-
+.titulo-principal { font-size:3em; color:#ff6b81; margin-top:40px; }
+.subtitulo { font-size:2em; color:#ff6b81; margin-top:10px; opacity:0; animation: fadeIn 2s forwards; }
+.texto-presentacion { font-size:1.8em; margin-top:15px; color:#ff6b81; }
 @keyframes fadeIn { to {opacity:1;} }
 
 /* CONTENEDOR */
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
-
-.card {
-  background: #161616;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 20px 0;
-  position: relative;
-  overflow: hidden;
-  color: #ff6b81;
-  font-size: 2em;
-}
+.container { max-width:900px; margin:auto; padding:20px; }
+.card { background:#161616; border-radius:12px; padding:20px; margin:20px 0; position:relative; overflow:hidden; color:#ff6b81; font-size:2em; }
 
 /* GALERIA */
-.galeria {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
-  position: relative;
-}
-
-.galeria img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 10px;
-  cursor: pointer;
-  z-index: 1;
-  position: relative;
-}
+.galeria { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; position:relative; }
+.galeria img { width:100%; height:140px; object-fit:cover; border-radius:10px; cursor:pointer; z-index:1; position:relative; }
 
 /* DESTELLOS DETRAS DE FOTOS */
-.destello {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #fff;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: destelloAnim 3s linear infinite;
-}
-
-@keyframes destelloAnim {
-  0% {transform: translate(0,0) scale(0);}
-  50% {transform: translate(0,-20px) scale(1);}
-  100% {transform: translate(0,-40px) scale(0);}
-}
+.destello { position:absolute; width:4px; height:4px; background:#fff; border-radius:50%; opacity:0.8; animation: destelloAnim 3s linear infinite; }
+@keyframes destelloAnim { 0%{transform:translate(0,0) scale(0);} 50%{transform:translate(0,-20px) scale(1);} 100%{transform:translate(0,-40px) scale(0);} }
 
 /* MODAL */
-#modal {
-  display: none;
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.9);
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-#modal img { max-width:90%; }
+#modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:9999; }
+#modal img { max-width:90%; max-height:90%; border-radius:12px; }
 
 /* CONTADOR */
-#contador {
-  font-size: 1.2em;
-  color: #ffb3c1;
-}
+#contador { font-size:1.2em; color:#ffb3c1; }
 
 /* FOOTER */
-footer {
-  margin: 40px 0 20px;
-  position: relative;
-}
-.brillo {
-  position: relative;
-  font-size: 2em;
-  color: #ff6b81;
-  overflow: hidden;
-}
-.brillo::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
-  animation: brillo 3s infinite;
-}
-@keyframes brillo {
-  0% {left:-100%;}
-  100% {left:100%;}
-}
-.espacio { height: 120px; }
+footer { margin:40px 0 20px; position:relative; }
+.footer-luz { position:relative; padding:10px; background:rgba(255,255,255,0.05); border-radius:12px; box-shadow:0 0 15px rgba(255,107,129,0.4); }
+.brillo { position:relative; font-size:2em; color:#ff6b81; overflow:hidden; }
+.brillo::after { content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent); animation:brillo 3s infinite; }
+@keyframes brillo { 0%{left:-100%;} 100%{left:100%;} }
+.espacio { height:120px; }
 
 /* INTRO */
-#intro {
-  position: fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  transition: opacity 1.5s ease;
-}
-#introText {
-  font-family: 'Great Vibes', cursive;
-  font-size:2em;
-  color:#ff6b81;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
+#intro { position:fixed; top:0; left:0; width:100%; height:100%; background:black; display:flex; justify-content:center; align-items:center; z-index:9999; transition:opacity 1.5s ease; }
+#introText { font-family:'Great Vibes', cursive; font-size:2em; color:#ff6b81; opacity:0; transition:opacity 1s ease; text-shadow:0 0 10px #ff6b81,0 0 20px #ff6b81; }
 
 /* FADE */
-#fadeScreen {
-  position: fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:black;
-  opacity: 0;
-  z-index:9998;
-  transition: opacity 1.5s ease;
-}
+#fadeScreen { position:fixed; top:0; left:0; width:100%; height:100%; background:black; opacity:0; z-index:9998; transition:opacity 1.5s ease; }
+
+/* PARTICULAS FLOTANTES */
+.particula { position:fixed; width:2px; height:2px; background:#fff; border-radius:50%; opacity:0.3; pointer-events:none; z-index:-1; animation:flotar 20s linear infinite; }
+@keyframes flotar { 0% {transform:translateY(100vh);} 100% {transform:translateY(-10vh);} }
 </style>
 </head>
 
@@ -209,110 +97,104 @@ footer {
 </div>
 
 <footer>
-  <div class="brillo">
-    ✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨
+  <div class="footer-luz">
+    <div class="brillo">✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨</div>
   </div>
   <div class="espacio"></div>
 </footer>
 
-<div id="modal">
-  <img id="modalImg">
-</div>
-
+<div id="modal"><img id="modalImg"></div>
 <div id="intro"><h1 id="introText"></h1></div>
 <div id="fadeScreen"></div>
 
 <script>
-/* INTRO */
-const textos = [
-  "Hay historias que no se planean…",
-  "pero llegan para cambiarlo todo…",
-  "y tú… eres la mía 🐥❤️"
-];
-let i = 0;
-const introText = document.getElementById("introText");
-const intro = document.getElementById("intro");
-const fade = document.getElementById("fadeScreen");
+/* PARTICULAS DE FONDO */
+for(let i=0;i<50;i++){
+  const p=document.createElement("div");
+  p.className="particula";
+  p.style.left=Math.random()*100+"%";
+  p.style.top=Math.random()*100+"vh";
+  p.style.animationDuration=(15+Math.random()*10)+"s";
+  document.body.appendChild(p);
+}
 
-function mostrarTexto() {
-  if (i < textos.length) {
-    introText.style.opacity = 0;
-    setTimeout(() => {
-      introText.innerText = textos[i];
-      introText.style.opacity = 1;
+/* INTRO */
+const textos=["Hay historias que no se planean…","pero llegan para cambiarlo todo…","y tú… eres la mía 🐥❤️"];
+let i=0;
+const introText=document.getElementById("introText");
+const intro=document.getElementById("intro");
+const fade=document.getElementById("fadeScreen");
+function mostrarTexto(){
+  if(i<textos.length){
+    introText.style.opacity=0;
+    setTimeout(()=>{
+      introText.innerText=textos[i];
+      introText.style.opacity=1;
       i++;
-      setTimeout(mostrarTexto, 2500);
-    }, 1000);
+      setTimeout(mostrarTexto,2500);
+    },1000);
   } else {
-    fade.style.opacity = 1;
-    setTimeout(() => {
-      intro.style.opacity = 0;
-      setTimeout(() => { intro.style.display = "none"; fade.style.opacity = 0; },1500);
-    }, 1000);
+    fade.style.opacity=1;
+    setTimeout(()=>{
+      intro.style.opacity=0;
+      setTimeout(()=>{ intro.style.display="none"; fade.style.opacity=0; },1500);
+    },1000);
   }
 }
 mostrarTexto();
 
 /* CONTADOR */
-const inicio = new Date("2025-10-13T00:00:00");
-function actualizarContador() {
-  const ahora = new Date();
-  const diff = ahora - inicio;
-
-  const dias = Math.floor(diff / (1000*60*60*24));
-  const horas = Math.floor((diff / (1000*60*60)) % 24);
-  const minutos = Math.floor((diff / (1000*60)) % 60);
-  const segundos = Math.floor((diff / 1000) % 60);
-
-  document.getElementById("contador").innerHTML =
-    `${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos 💖`;
+const inicio=new Date("2025-10-13T00:00:00");
+function actualizarContador(){
+  const ahora=new Date();
+  const diff=ahora-inicio;
+  const dias=Math.floor(diff/(1000*60*60*24));
+  const horas=Math.floor((diff/(1000*60*60))%24);
+  const minutos=Math.floor((diff/(1000*60))%60);
+  const segundos=Math.floor((diff/1000)%60);
+  document.getElementById("contador").innerHTML=`${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos 💖`;
 }
 setInterval(actualizarContador,1000);
 actualizarContador();
 
 /* GALERIA */
-const usuario = "feijookevin-bit";
-const repo = "Proyecto-wrb";
-
+const usuario="feijookevin-bit";
+const repo="Proyecto-wrb";
 fetch(`https://api.github.com/repos/${usuario}/${repo}/contents/fotos`)
 .then(res=>res.json())
 .then(data=>{
-  const galeria = document.getElementById("galeria");
-
+  const galeria=document.getElementById("galeria");
   data.forEach(img=>{
     if(img.name.match(/\.(jpg|jpeg|png|webp)$/i)){
-      let imagen = document.createElement("img");
-      imagen.src = img.download_url;
-      imagen.onclick = ()=>{ document.getElementById("modal").style.display="flex"; document.getElementById("modalImg").src=imagen.src; };
+      let imagen=document.createElement("img");
+      imagen.src=img.download_url;
+      imagen.onclick=()=>{ document.getElementById("modal").style.display="flex"; document.getElementById("modalImg").src=imagen.src; };
       galeria.appendChild(imagen);
     }
   });
 
-  // DESTELLOS DETRAS DE LAS FOTOS
   for(let i=0;i<30;i++){
-    const d = document.createElement("div");
+    const d=document.createElement("div");
     d.className="destello";
-    d.style.left = Math.random()*100+"%";
-    d.style.top = Math.random()*140+"px";
+    d.style.left=Math.random()*100+"%";
+    d.style.top=Math.random()*140+"px";
     galeria.appendChild(d);
   }
 });
 
 /* MODAL */
-document.getElementById("modal").onclick = ()=>{ document.getElementById("modal").style.display="none"; };
+document.getElementById("modal").onclick=()=>{ document.getElementById("modal").style.display="none"; };
 
 /* MUSICA */
-let audio = new Audio("musica.mp3");
-audio.loop = true;
-let iniciada = false;
-document.body.addEventListener("click", ()=>{
-  if(!iniciada){ audio.play(); iniciada = true; }
-});
+let audio=new Audio("musica.mp3");
+audio.loop=true;
+let iniciada=false;
+document.body.addEventListener("click",()=>{ if(!iniciada){ audio.play(); iniciada=true; } });
 
 /* CORAZONES Y POLLITOS */
 setInterval(()=>{
-  const el = document.createElement("div");
-  el.innerText = ["💖","🐥","💛","💜","💙"][Math.floor(Math.random()*5)];
+  const el=document.createElement("div");
+  el.innerText=["💖","🐥","💛","💜","💙"][Math.floor(Math.random()*5)];
   el.style.position="fixed";
   el.style.left=Math.random()*100+"%";
   el.style.top="100vh";
