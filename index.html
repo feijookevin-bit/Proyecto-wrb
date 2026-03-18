@@ -286,7 +286,7 @@ document.getElementById("modal").onclick = ()=>{
 
 /* MUSICA */
 let audio = new Audio("musica.mp3");
-let iniciada = false;
+audio.loop = true;
 
 document.body.addEventListener("click", ()=>{
   if(!iniciada){
