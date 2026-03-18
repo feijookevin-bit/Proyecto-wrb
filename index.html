@@ -5,103 +5,58 @@
 <title>Nuestra historia 🐥❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Fuentes -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-/* BODY */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #0e0e0e;
+  background: linear-gradient(to bottom, #0e0e0e, #1a1a1a);
   color: #f2f2f2;
   text-align: center;
   overflow-x: hidden;
-  animation: fondoAnim 20s infinite alternate;
-  background-image: url('tribal.png'); /* Asegúrate de subir un PNG tribal tenue */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
-/* ANIMACION FONDO */
-@keyframes fondoAnim {
-  0% {background-color: #0e0e0e;}
-  50% {background-color: #1a1a1a;}
-  100% {background-color: #0e0e0e;}
+/* Video de fondo de viento/bruma */
+#video-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  opacity: 0.25; /* Ajusta la opacidad */
 }
 
 /* TITULO */
-h1 {
-  font-family: 'Great Vibes', cursive;
+.titulo-principal {
+  font-family: 'Cursive Bold', cursive;
   font-size: 3em;
   color: #ff6b81;
-  text-shadow: 0 0 15px rgba(255,107,129,0.5);
+  animation: brillo 3s infinite;
+  margin-top: 40px;
 }
 
-/* NOMBRE ANIMADO */
-.nombre {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2em;
-  color: #ffb3c1;
-  opacity: 0;
-  animation: aparecerNombre 3s ease forwards;
-  animation-delay: 6s;
-  text-shadow: 0 0 10px rgba(255,179,193,0.5);
-}
-
-@keyframes aparecerNombre {
-  from {opacity:0; transform: scale(0.8);}
-  to {opacity:1; transform: scale(1);}
-}
-
-/* SUBTITULO LEGIBLE */
 .subtitulo {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  font-size: 1.4em;
-  color: #ffb3c1;
+  font-family: 'Cursive Bold', cursive;
+  font-size: 1.5em;
+  color: #f2f2f2;
   margin-top: 10px;
+  animation: fadeIn 2s ease-in-out forwards;
   opacity: 0;
-  animation: aparecerSubtitulo 3s ease forwards;
-  animation-delay: 8s;
-  text-shadow: 0 0 5px rgba(255,179,193,0.4);
 }
 
-@keyframes aparecerSubtitulo {
-  from {opacity:0; transform: translateY(10px);}
-  to {opacity:1; transform: translateY(0);}
+/* ANIMACION BRILLO */
+@keyframes brillo {
+  0% {text-shadow: 0 0 10px rgba(255, 107, 129,0.4);}
+  50% {text-shadow: 0 0 30px rgba(255, 107, 129,0.8);}
+  100% {text-shadow: 0 0 10px rgba(255, 107, 129,0.4);}
 }
 
-/* INTRO */
-#intro {
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  transition: opacity 1.5s ease;
-}
-
-#introText {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2em;
-  opacity: 0;
-  transition: opacity 1s ease;
-  text-shadow: 0 0 15px rgba(255,107,129,0.5);
-}
-
-/* FADE */
-#fadeScreen {
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:black;
-  opacity: 0;
-  z-index:9998;
-  transition: opacity 1.5s ease;
+@keyframes fadeIn {
+  to {opacity: 1;}
 }
 
 /* CONTENIDO */
@@ -116,6 +71,8 @@ h1 {
   border-radius: 12px;
   padding: 20px;
   margin: 20px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 /* GALERIA */
@@ -123,6 +80,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 10px;
+  position: relative;
 }
 
 .galeria img {
@@ -131,12 +89,25 @@ h1 {
   object-fit: cover;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  z-index: 1;
+  position: relative;
 }
 
-.galeria img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255,107,129,0.5);
+/* DESTELLOS DETRAS DE LAS FOTOS */
+.destello {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: destelloAnim 3s linear infinite;
+}
+
+@keyframes destelloAnim {
+  0% {transform: translate(0,0) scale(0);}
+  50% {transform: translate(0,-20px) scale(1);}
+  100% {transform: translate(0,-40px) scale(0);}
 }
 
 /* MODAL */
@@ -148,6 +119,7 @@ h1 {
   background:rgba(0,0,0,0.9);
   justify-content:center;
   align-items:center;
+  z-index:9999;
 }
 
 #modal img {
@@ -160,18 +132,19 @@ h1 {
   color: #ffb3c1;
 }
 
-/* TEXTO BRILLO */
+/* FOOTER */
+footer {
+  margin: 40px 0 20px;
+  position: relative;
+}
+
 .brillo {
   position: relative;
   font-family: 'Great Vibes', cursive;
   font-size: 2em;
   color: #ff6b81;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: aparecerFooter 3s ease forwards;
-  animation-delay: 12s; /* Aparece después del scroll */
-  text-shadow: 0 0 15px rgba(255,107,129,0.5);
+  animation: fadeIn 2s ease-in-out forwards;
 }
 
 .brillo::after {
@@ -185,16 +158,6 @@ h1 {
   animation: brillo 3s infinite;
 }
 
-@keyframes brillo {
-  0% {left:-100%;}
-  100% {left:100%;}
-}
-
-@keyframes aparecerFooter {
-  from {opacity:0; transform: translateY(30px);}
-  to {opacity:1; transform: translateY(0);}
-}
-
 /* ESPACIO EXTRA */
 .espacio {
   height: 120px;
@@ -204,25 +167,17 @@ h1 {
 
 <body>
 
-<div id="intro">
-  <h1 id="introText"></h1>
-</div>
-
-<div id="fadeScreen"></div>
+<!-- VIDEO DE FONDO -->
+<video autoplay loop muted id="video-bg">
+  <source src="viento.mp4" type="video/mp4">
+</video>
 
 <header>
-  <h1>Nuestra historia 🐥❤️</h1>
-  <h2 class="nombre">✨ Katherine ✨</h2>
-  <h3 class="subtitulo">Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖</h3>
+  <h1 class="titulo-principal">✨ Nuestra historia: Katherine ✨</h1>
+  <h2 class="subtitulo">Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖</h2>
 </header>
 
 <div class="container">
-
-  <div class="card">
-    <p>
-      En este espacio que es solo para ti mi pollito y para mí, quedarán plasmadas nuestras historias y mejores momentos vividos 💖
-    </p>
-  </div>
 
   <div class="card">
     <h3>⏳ Nuestro tiempo juntos</h3>
@@ -256,9 +211,18 @@ const textos = [
 ];
 
 let i = 0;
-const introText = document.getElementById("introText");
-const intro = document.getElementById("intro");
-const fade = document.getElementById("fadeScreen");
+const introText = document.createElement("h1");
+const intro = document.createElement("div");
+intro.id = "intro";
+intro.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity 1.5s ease;";
+document.body.prepend(intro);
+intro.appendChild(introText);
+introText.style.cssText = "font-family: 'Cursive Bold', cursive; font-size:2em; color:white; opacity:0; transition:opacity 1s ease;";
+
+const fade = document.createElement("div");
+fade.id = "fadeScreen";
+fade.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:black;opacity:0;z-index:9998;transition:opacity 1.5s ease;";
+document.body.prepend(fade);
 
 function mostrarTexto() {
   if (i < textos.length) {
@@ -274,25 +238,25 @@ function mostrarTexto() {
     setTimeout(() => {
       intro.style.opacity = 0;
       setTimeout(() => {
-        intro.style.display = "none";
+        intro.remove();
         fade.style.opacity = 0;
-      }, 1500);
+      },1500);
     }, 1000);
   }
 }
-
 mostrarTexto();
 
 /* CONTADOR */
 const inicio = new Date("2025-10-13T00:00:00");
-
 function actualizarContador() {
   const ahora = new Date();
   const diff = ahora - inicio;
+
   const dias = Math.floor(diff / (1000*60*60*24));
   const horas = Math.floor((diff / (1000*60*60)) % 24);
   const minutos = Math.floor((diff / (1000*60)) % 60);
   const segundos = Math.floor((diff / 1000) % 60);
+
   document.getElementById("contador").innerHTML =
     `${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos 💖`;
 }
@@ -307,17 +271,29 @@ fetch(`https://api.github.com/repos/${usuario}/${repo}/contents/fotos`)
 .then(res=>res.json())
 .then(data=>{
   const galeria = document.getElementById("galeria");
+
   data.forEach(img=>{
     if(img.name.match(/\.(jpg|jpeg|png|webp)$/i)){
       let imagen = document.createElement("img");
       imagen.src = img.download_url;
+
       imagen.onclick = ()=>{
         document.getElementById("modal").style.display="flex";
         document.getElementById("modalImg").src=imagen.src;
       };
+
       galeria.appendChild(imagen);
     }
   });
+
+  // DESTELLOS DETRAS DE LAS FOTOS
+  for(let i=0;i<30;i++){
+    const d = document.createElement("div");
+    d.className="destello";
+    d.style.left = Math.random()*100+"%";
+    d.style.top = Math.random()*140+"px";
+    galeria.appendChild(d);
+  }
 });
 
 /* MODAL */
@@ -340,18 +316,23 @@ document.body.addEventListener("click", ()=>{
 setInterval(()=>{
   const el = document.createElement("div");
   el.innerText = Math.random()>0.5 ? "💖":"🐥";
+
   el.style.position="fixed";
   el.style.left=Math.random()*100+"%";
   el.style.top="100vh";
   el.style.fontSize=(16+Math.random()*12)+"px";
   el.style.pointerEvents="none";
   el.style.transition="transform 8s linear, opacity 8s linear";
+
   document.body.appendChild(el);
+
   setTimeout(()=>{
     el.style.transform="translateY(-120vh)";
     el.style.opacity="0";
   },50);
+
   setTimeout(()=>el.remove(),8000);
+
 },2000);
 </script>
 
