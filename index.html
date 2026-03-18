@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+/* BODY */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -15,6 +16,18 @@ body {
   color: #f2f2f2;
   text-align: center;
   overflow-x: hidden;
+  animation: fondoAnim 20s infinite alternate;
+  background-image: url('tribal.png'); /* Asegúrate de subir un PNG tribal tenue */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ANIMACION FONDO */
+@keyframes fondoAnim {
+  0% {background-color: #0e0e0e;}
+  50% {background-color: #1a1a1a;}
+  100% {background-color: #0e0e0e;}
 }
 
 /* TITULO */
@@ -22,6 +35,7 @@ h1 {
   font-family: 'Great Vibes', cursive;
   font-size: 3em;
   color: #ff6b81;
+  text-shadow: 0 0 15px rgba(255,107,129,0.5);
 }
 
 /* NOMBRE ANIMADO */
@@ -32,6 +46,7 @@ h1 {
   opacity: 0;
   animation: aparecerNombre 3s ease forwards;
   animation-delay: 6s;
+  text-shadow: 0 0 10px rgba(255,179,193,0.5);
 }
 
 @keyframes aparecerNombre {
@@ -39,11 +54,29 @@ h1 {
   to {opacity:1; transform: scale(1);}
 }
 
+/* SUBTITULO LEGIBLE */
+.subtitulo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1.4em;
+  color: #ffb3c1;
+  margin-top: 10px;
+  opacity: 0;
+  animation: aparecerSubtitulo 3s ease forwards;
+  animation-delay: 8s;
+  text-shadow: 0 0 5px rgba(255,179,193,0.4);
+}
+
+@keyframes aparecerSubtitulo {
+  from {opacity:0; transform: translateY(10px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
 /* INTRO */
 #intro {
   position: fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   background:black;
   display:flex;
   justify-content:center;
@@ -57,13 +90,14 @@ h1 {
   font-size: 2em;
   opacity: 0;
   transition: opacity 1s ease;
+  text-shadow: 0 0 15px rgba(255,107,129,0.5);
 }
 
 /* FADE */
 #fadeScreen {
   position: fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   background:black;
   opacity: 0;
   z-index:9998;
@@ -97,14 +131,20 @@ h1 {
   object-fit: cover;
   border-radius: 10px;
   cursor: pointer;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.galeria img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255,107,129,0.5);
 }
 
 /* MODAL */
 #modal {
   display: none;
   position: fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   background:rgba(0,0,0,0.9);
   justify-content:center;
   align-items:center;
@@ -127,6 +167,11 @@ h1 {
   font-size: 2em;
   color: #ff6b81;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: aparecerFooter 3s ease forwards;
+  animation-delay: 12s; /* Aparece después del scroll */
+  text-shadow: 0 0 15px rgba(255,107,129,0.5);
 }
 
 .brillo::after {
@@ -143,6 +188,11 @@ h1 {
 @keyframes brillo {
   0% {left:-100%;}
   100% {left:100%;}
+}
+
+@keyframes aparecerFooter {
+  from {opacity:0; transform: translateY(30px);}
+  to {opacity:1; transform: translateY(0);}
 }
 
 /* ESPACIO EXTRA */
@@ -163,6 +213,7 @@ h1 {
 <header>
   <h1>Nuestra historia 🐥❤️</h1>
   <h2 class="nombre">✨ Katherine ✨</h2>
+  <h3 class="subtitulo">Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖</h3>
 </header>
 
 <div class="container">
@@ -212,7 +263,6 @@ const fade = document.getElementById("fadeScreen");
 function mostrarTexto() {
   if (i < textos.length) {
     introText.style.opacity = 0;
-
     setTimeout(() => {
       introText.innerText = textos[i];
       introText.style.opacity = 1;
@@ -221,15 +271,12 @@ function mostrarTexto() {
     }, 1000);
   } else {
     fade.style.opacity = 1;
-
     setTimeout(() => {
       intro.style.opacity = 0;
-
       setTimeout(() => {
         intro.style.display = "none";
         fade.style.opacity = 0;
       }, 1500);
-
     }, 1000);
   }
 }
@@ -242,16 +289,13 @@ const inicio = new Date("2025-10-13T00:00:00");
 function actualizarContador() {
   const ahora = new Date();
   const diff = ahora - inicio;
-
   const dias = Math.floor(diff / (1000*60*60*24));
   const horas = Math.floor((diff / (1000*60*60)) % 24);
   const minutos = Math.floor((diff / (1000*60)) % 60);
   const segundos = Math.floor((diff / 1000) % 60);
-
   document.getElementById("contador").innerHTML =
     `${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos 💖`;
 }
-
 setInterval(actualizarContador,1000);
 actualizarContador();
 
@@ -263,17 +307,14 @@ fetch(`https://api.github.com/repos/${usuario}/${repo}/contents/fotos`)
 .then(res=>res.json())
 .then(data=>{
   const galeria = document.getElementById("galeria");
-
   data.forEach(img=>{
     if(img.name.match(/\.(jpg|jpeg|png|webp)$/i)){
       let imagen = document.createElement("img");
       imagen.src = img.download_url;
-
       imagen.onclick = ()=>{
         document.getElementById("modal").style.display="flex";
         document.getElementById("modalImg").src=imagen.src;
       };
-
       galeria.appendChild(imagen);
     }
   });
@@ -287,7 +328,7 @@ document.getElementById("modal").onclick = ()=>{
 /* MUSICA */
 let audio = new Audio("musica.mp3");
 audio.loop = true;
-
+let iniciada = false;
 document.body.addEventListener("click", ()=>{
   if(!iniciada){
     audio.play();
@@ -299,23 +340,18 @@ document.body.addEventListener("click", ()=>{
 setInterval(()=>{
   const el = document.createElement("div");
   el.innerText = Math.random()>0.5 ? "💖":"🐥";
-
   el.style.position="fixed";
   el.style.left=Math.random()*100+"%";
   el.style.top="100vh";
   el.style.fontSize=(16+Math.random()*12)+"px";
   el.style.pointerEvents="none";
   el.style.transition="transform 8s linear, opacity 8s linear";
-
   document.body.appendChild(el);
-
   setTimeout(()=>{
     el.style.transform="translateY(-120vh)";
     el.style.opacity="0";
   },50);
-
   setTimeout(()=>el.remove(),8000);
-
 },2000);
 </script>
 
