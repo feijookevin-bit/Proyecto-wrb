@@ -5,58 +5,49 @@
 <title>Nuestra historia 🐥❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fuentes -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Fuente para todo -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Great Vibes', cursive;
   background: linear-gradient(to bottom, #0e0e0e, #1a1a1a);
-  color: #f2f2f2;
+  color: #ff6b81;
   text-align: center;
   overflow-x: hidden;
+  position: relative;
 }
 
-/* Video de fondo de viento/bruma */
+/* Video de fondo tipo viento */
 #video-bg {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   object-fit: cover;
   z-index: -2;
-  opacity: 0.25; /* Ajusta la opacidad */
+  opacity: 0.25;
 }
 
-/* TITULO */
+/* TITULO Y SUBTITULO */
 .titulo-principal {
-  font-family: 'Cursive Bold', cursive;
+  font-family: 'Great Vibes', cursive;
   font-size: 3em;
   color: #ff6b81;
-  animation: brillo 3s infinite;
   margin-top: 40px;
 }
 
 .subtitulo {
-  font-family: 'Cursive Bold', cursive;
+  font-family: 'Great Vibes', cursive;
   font-size: 1.5em;
-  color: #f2f2f2;
+  color: #ff6b81;
   margin-top: 10px;
-  animation: fadeIn 2s ease-in-out forwards;
   opacity: 0;
-}
-
-/* ANIMACION BRILLO */
-@keyframes brillo {
-  0% {text-shadow: 0 0 10px rgba(255, 107, 129,0.4);}
-  50% {text-shadow: 0 0 30px rgba(255, 107, 129,0.8);}
-  100% {text-shadow: 0 0 10px rgba(255, 107, 129,0.4);}
+  animation: fadeIn 2s forwards;
 }
 
 @keyframes fadeIn {
-  to {opacity: 1;}
+  to {opacity:1;}
 }
 
 /* CONTENIDO */
@@ -73,6 +64,8 @@ body {
   margin: 20px 0;
   position: relative;
   overflow: hidden;
+  font-family: 'Great Vibes', cursive;
+  color: #ff6b81;
 }
 
 /* GALERIA */
@@ -93,7 +86,7 @@ body {
   position: relative;
 }
 
-/* DESTELLOS DETRAS DE LAS FOTOS */
+/* DESTELLOS DETRAS DE FOTOS */
 .destello {
   position: absolute;
   width: 4px;
@@ -144,24 +137,11 @@ footer {
   font-size: 2em;
   color: #ff6b81;
   overflow: hidden;
-  animation: fadeIn 2s ease-in-out forwards;
 }
 
-.brillo::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
-  animation: brillo 3s infinite;
-}
+.espacio { height: 120px; }
 
-/* ESPACIO EXTRA */
-.espacio {
-  height: 120px;
-}
+/* CORAZONES Y POLLITOS */
 </style>
 </head>
 
@@ -173,12 +153,12 @@ footer {
 </video>
 
 <header>
-  <h1 class="titulo-principal">✨ Nuestra historia: Katherine ✨</h1>
-  <h2 class="subtitulo">Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖</h2>
+  <h1 class="titulo-principal">Nuestra historia</h1>
+  <h2 class="subtitulo">✨ Katherine ✨</h2>
+  <p>Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖</p>
 </header>
 
 <div class="container">
-
   <div class="card">
     <h3>⏳ Nuestro tiempo juntos</h3>
     <div id="contador"></div>
@@ -188,7 +168,6 @@ footer {
     <h3>📸 Nuestros recuerdos</h3>
     <div class="galeria" id="galeria"></div>
   </div>
-
 </div>
 
 <footer>
@@ -209,7 +188,6 @@ const textos = [
   "pero llegan para cambiarlo todo…",
   "y tú… eres la mía 🐥❤️"
 ];
-
 let i = 0;
 const introText = document.createElement("h1");
 const intro = document.createElement("div");
@@ -217,7 +195,7 @@ intro.id = "intro";
 intro.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity 1.5s ease;";
 document.body.prepend(intro);
 intro.appendChild(introText);
-introText.style.cssText = "font-family: 'Cursive Bold', cursive; font-size:2em; color:white; opacity:0; transition:opacity 1s ease;";
+introText.style.cssText = "font-family: 'Great Vibes', cursive; font-size:2em; color:#ff6b81; opacity:0; transition:opacity 1s ease;";
 
 const fade = document.createElement("div");
 fade.id = "fadeScreen";
@@ -237,10 +215,7 @@ function mostrarTexto() {
     fade.style.opacity = 1;
     setTimeout(() => {
       intro.style.opacity = 0;
-      setTimeout(() => {
-        intro.remove();
-        fade.style.opacity = 0;
-      },1500);
+      setTimeout(() => { intro.remove(); fade.style.opacity = 0; },1500);
     }, 1000);
   }
 }
@@ -276,12 +251,7 @@ fetch(`https://api.github.com/repos/${usuario}/${repo}/contents/fotos`)
     if(img.name.match(/\.(jpg|jpeg|png|webp)$/i)){
       let imagen = document.createElement("img");
       imagen.src = img.download_url;
-
-      imagen.onclick = ()=>{
-        document.getElementById("modal").style.display="flex";
-        document.getElementById("modalImg").src=imagen.src;
-      };
-
+      imagen.onclick = ()=>{ document.getElementById("modal").style.display="flex"; document.getElementById("modalImg").src=imagen.src; };
       galeria.appendChild(imagen);
     }
   });
@@ -297,43 +267,30 @@ fetch(`https://api.github.com/repos/${usuario}/${repo}/contents/fotos`)
 });
 
 /* MODAL */
-document.getElementById("modal").onclick = ()=>{
-  document.getElementById("modal").style.display="none";
-};
+document.getElementById("modal").onclick = ()=>{ document.getElementById("modal").style.display="none"; };
 
 /* MUSICA */
 let audio = new Audio("musica.mp3");
 audio.loop = true;
 let iniciada = false;
 document.body.addEventListener("click", ()=>{
-  if(!iniciada){
-    audio.play();
-    iniciada = true;
-  }
+  if(!iniciada){ audio.play(); iniciada = true; }
 });
 
-/* CORAZONES Y POLLITOS SUAVES */
+/* CORAZONES Y POLLITOS */
 setInterval(()=>{
   const el = document.createElement("div");
   el.innerText = Math.random()>0.5 ? "💖":"🐥";
-
   el.style.position="fixed";
   el.style.left=Math.random()*100+"%";
   el.style.top="100vh";
   el.style.fontSize=(16+Math.random()*12)+"px";
   el.style.pointerEvents="none";
   el.style.transition="transform 8s linear, opacity 8s linear";
-
   document.body.appendChild(el);
-
-  setTimeout(()=>{
-    el.style.transform="translateY(-120vh)";
-    el.style.opacity="0";
-  },50);
-
+  setTimeout(()=>{ el.style.transform="translateY(-120vh)"; el.style.opacity="0"; },50);
   setTimeout(()=>el.remove(),8000);
-
-},2000);
+},1500);
 </script>
 
 </body>
