@@ -33,6 +33,7 @@ h1 {
   justify-content:center;
   align-items:center;
   z-index:9999;
+  transition: opacity 1.5s ease;
 }
 
 #introText {
@@ -41,6 +42,18 @@ h1 {
   opacity: 0;
   transition: opacity 1s ease;
   padding: 20px;
+}
+
+/* PANTALLA NEGRA TRANSICIÓN */
+#fadeScreen {
+  position: fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:black;
+  opacity: 0;
+  z-index:9998;
+  pointer-events:none;
+  transition: opacity 1.5s ease;
 }
 
 /* CONTENIDO */
@@ -106,7 +119,7 @@ button {
   font-size: 18px;
 }
 
-/* TE AMO FINAL */
+/* TE AMO */
 #teamo {
   font-family: 'Playfair Display', serif;
   font-size: 2.5em;
@@ -122,7 +135,7 @@ button {
   100% { transform: scale(1); }
 }
 
-/* ANIMACION FLOTANTE */
+/* FLOTANTES */
 @keyframes subir {
   from {transform: translateY(0); opacity:1;}
   to {transform: translateY(-100vh); opacity:0;}
@@ -136,6 +149,9 @@ button {
 <div id="intro">
   <h1 id="introText"></h1>
 </div>
+
+<!-- PANTALLA NEGRA -->
+<div id="fadeScreen"></div>
 
 <header>
   <h1>Nuestra historia 🐥❤️</h1>
@@ -160,12 +176,10 @@ button {
   <div id="teamo">TE AMO ❤️</div>
 </footer>
 
-<!-- MODAL -->
 <div id="modal">
   <img id="modalImg">
 </div>
 
-<!-- MUSICA -->
 <audio id="musica" loop>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
@@ -173,7 +187,7 @@ button {
 <button onclick="toggleMusica()">🎶</button>
 
 <script>
-/* INTRO SUAVE */
+/* INTRO + TRANSICIÓN PRO */
 const textos = [
   "Hay historias que no se planean…",
   "pero llegan para cambiarlo todo…",
@@ -182,6 +196,8 @@ const textos = [
 
 let i = 0;
 const introText = document.getElementById("introText");
+const intro = document.getElementById("intro");
+const fade = document.getElementById("fadeScreen");
 
 function mostrarTexto() {
   if (i < textos.length) {
@@ -191,17 +207,29 @@ function mostrarTexto() {
       introText.innerText = textos[i];
       introText.style.opacity = 1;
       i++;
-
       setTimeout(mostrarTexto, 2500);
     }, 1000);
   } else {
-    document.getElementById("intro").style.display = "none";
+    // 👉 fade a negro
+    fade.style.opacity = 1;
+
+    setTimeout(() => {
+      intro.style.opacity = 0;
+
+      setTimeout(() => {
+        intro.style.display = "none";
+
+        // 👉 quitar negro poco a poco
+        fade.style.opacity = 0;
+      }, 1500);
+
+    }, 800);
   }
 }
 
 mostrarTexto();
 
-/* GALERIA AUTOMATICA (GitHub) */
+/* GALERIA AUTOMATICA */
 fetch('https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos')
 .then(res=>res.json())
 .then(data=>{
@@ -238,12 +266,11 @@ function toggleMusica(){
   }
 }
 
-/* autoplay al tocar */
 document.body.addEventListener("click", () => {
   musica.play();
 }, { once: true });
 
-/* CORAZONES + POLLITOS */
+/* ANIMACION SUAVE (ARREGLADA) */
 setInterval(()=>{
   let elemento = document.createElement("div");
 
@@ -251,14 +278,15 @@ setInterval(()=>{
 
   elemento.style.position="fixed";
   elemento.style.left=Math.random()*100+"%";
-  elemento.style.bottom="0";
-  elemento.style.fontSize=(20+Math.random()*20)+"px";
-  elemento.style.animation="subir 6s linear";
+  elemento.style.bottom="-20px";
+  elemento.style.fontSize=(18+Math.random()*15)+"px";
+  elemento.style.pointerEvents="none";
+  elemento.style.animation="subir 8s linear";
 
   document.body.appendChild(elemento);
 
-  setTimeout(()=>elemento.remove(),6000);
-},500);
+  setTimeout(()=>elemento.remove(),8000);
+},1500);
 </script>
 
 </body>
