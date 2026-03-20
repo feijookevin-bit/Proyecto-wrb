@@ -12,7 +12,6 @@ body {
   margin: 0;
   font-family: 'Great Vibes', cursive;
   font-size: 20px;
-  letter-spacing: 1px;
   background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
   color: #ff6b81;
   text-align: center;
@@ -33,8 +32,6 @@ body {
 /* TITULOS */
 .titulo-principal { font-size:3.5em; }
 .subtitulo { font-size:2.3em; opacity:0; animation:fadeIn 2s forwards; }
-
-header p { font-size:1.4em; }
 
 /* CARDS */
 .container { max-width:900px; margin:auto; padding:20px; }
@@ -74,7 +71,7 @@ header p { font-size:1.4em; }
   transition:1s;
 }
 
-/* ESTRELLAS SUAVES */
+/* ESTRELLAS */
 .star-bg {
   position:fixed;
   color:white;
@@ -118,6 +115,21 @@ header p { font-size:1.4em; }
 /* TEXTO FINAL */
 #finalText { font-size:1.8em; margin-top:30px; }
 
+/* FRASE ORIGINAL */
+.brillo {
+  font-size:2em;
+  margin-top:40px;
+  position:relative;
+}
+.brillo::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.8),transparent);
+  animation:brillo 3s infinite;
+}
+
 /* POLLITO */
 #pollito {
   width:120px;
@@ -139,7 +151,10 @@ header p { font-size:1.4em; }
   justify-content:center;
   align-items:center;
   z-index:9999;
+  transition: opacity 1s ease; /* 🔥 agregado */
 }
+#introText { font-size:2em; }
+
 .star {
   position:absolute;
   color:white;
@@ -150,51 +165,55 @@ header p { font-size:1.4em; }
   100%{transform:translate(var(--x),var(--y));}
 }
 
-/* 💖 CORAZONES */
-.corazon-click {
+/* CORAZONES FLOTANDO */
+.flotante {
   position:fixed;
   pointer-events:none;
   font-size:20px;
+  animation:subir 8s linear forwards;
+}
+@keyframes subir {
+  to{transform:translateY(-120vh);opacity:0;}
+}
+
+/* CLICK */
+.corazon-click {
+  position:fixed;
+  pointer-events:none;
   animation:subirCorazon 2s forwards;
 }
 @keyframes subirCorazon {
-  to{
-    transform:translateY(-120px) scale(1.8);
-    opacity:0;
-  }
+  to{transform:translateY(-120px);opacity:0;}
 }
 
-/* ✨ CHISPAS */
+/* CHISPAS */
 .chispa {
   position:fixed;
   width:4px;
   height:4px;
   background:#fff;
   border-radius:50%;
-  pointer-events:none;
   animation:chispaAnim 1s forwards;
 }
 @keyframes chispaAnim {
-  to{
-    transform:translate(var(--x),var(--y));
-    opacity:0;
-  }
+  to{transform:translate(var(--x),var(--y));opacity:0;}
 }
 
 @keyframes fadeIn { to{opacity:1;} }
+@keyframes brillo { from{left:-100%;} to{left:100%;} }
+
 </style>
 </head>
 
 <body>
 
 <video autoplay loop muted id="video-bg">
-  <source src="viento.mp4">
+  <source src="viento.mp4" type="video/mp4"> <!-- 🔥 corregido -->
 </video>
 
 <header>
   <h1 class="titulo-principal">Nuestra historia</h1>
   <h2 class="subtitulo">✨ Katherine ✨</h2>
-  <p>Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖</p>
 </header>
 
 <div class="container">
@@ -210,30 +229,62 @@ header p { font-size:1.4em; }
 </div>
 
 <footer>
+  <div class="brillo">
+    ✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨
+  </div>
+
   <div id="finalText"></div>
+
   <img id="pollito" src="fotos/pollito.png">
 </footer>
 
 <div id="modal"><img id="modalImg"></div>
-<div id="intro"></div>
+<div id="intro"><h1 id="introText"></h1></div>
 
 <script>
 
-/* INTRO ESTRELLAS */
-function crearEstrella(){
-  const star=document.createElement("div");
-  star.className="star";
-  star.innerText="✨";
-  star.style.left=Math.random()*100+"%";
-  star.style.top=Math.random()*100+"%";
-  star.style.setProperty('--x',(Math.random()*200-100)+"vw");
-  star.style.setProperty('--y',(Math.random()*200-100)+"vh");
-  document.getElementById("intro").appendChild(star);
-}
-setInterval(crearEstrella,200);
-setTimeout(()=>document.getElementById("intro").remove(),4000);
+/* VARIABLES */
+const contador = document.getElementById("contador");
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modalImg");
+const intro = document.getElementById("intro");
+const finalText = document.getElementById("finalText");
 
-/* ESTRELLAS FONDO */
+/* INTRO */
+const textos=[
+"Hay historias que no se planean…",
+"pero llegan para cambiarlo todo…",
+"y tú… eres la mía 🐥❤️"
+];
+let i=0;
+const introText=document.getElementById("introText");
+
+function estrellasIntro(){
+  const s=document.createElement("div");
+  s.className="star";
+  s.innerText="✨";
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*100+"%";
+  s.style.setProperty('--x',(Math.random()*200-100)+"vw");
+  s.style.setProperty('--y',(Math.random()*200-100)+"vh");
+  intro.appendChild(s);
+
+  setTimeout(()=>s.remove(),10000); // 🔥 evita lag
+}
+setInterval(estrellasIntro,200);
+
+function mostrarTexto(){
+  if(i<textos.length){
+    introText.innerText=textos[i++];
+    setTimeout(mostrarTexto,2500);
+  }else{
+    intro.style.opacity=0;
+    setTimeout(()=>intro.remove(),1500);
+  }
+}
+mostrarTexto();
+
+/* ESTRELLAS PAGINA */
 setInterval(()=>{
   const s=document.createElement("div");
   s.className="star-bg";
@@ -246,65 +297,90 @@ setInterval(()=>{
   setTimeout(()=>s.remove(),20000);
 },800);
 
-/* GALERIA */
-fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos")
-.then(r=>r.json()).then(data=>{
-  const g=document.getElementById("galeria");
-  data.forEach(img=>{
-    if(img.name.match(/\.(jpg|png|jpeg)$/)){
-      let i=document.createElement("img");
-      i.src=img.download_url;
-      i.onclick=()=>{
-        modal.style.display="flex";
-        modalImg.src=i.src;
-      };
-      g.appendChild(i);
-    }
-  });
-});
-
-/* MODAL */
-const modal=document.getElementById("modal");
-const modalImg=document.getElementById("modalImg");
-modal.onclick=()=>modal.style.display="none";
-
 /* CONTADOR */
 const inicio=new Date("2025-10-13");
 setInterval(()=>{
   const d=new Date()-inicio;
-  document.getElementById("contador").innerHTML=
-  Math.floor(d/86400000)+" días 💖";
+  const dias=Math.floor(d/86400000);
+  const horas=Math.floor((d/3600000)%24);
+  const min=Math.floor((d/60000)%60);
+  const seg=Math.floor((d/1000)%60);
+
+  contador.innerHTML=
+  `${dias} días, ${horas} horas, ${min} minutos y ${seg} segundos contigo… y quiero toda la vida 💖`;
 },1000);
 
-/* TEXTO FINAL */
-const txt="Y si la vida me diera mil opciones… mil veces te elegiría a ti mi amor 🐥❤️";
-let i=0;
-window.addEventListener("scroll",()=>{
-  if(window.innerHeight+window.scrollY>=document.body.offsetHeight-50){
-    let inter=setInterval(()=>{
-      if(i<txt.length){
-        finalText.innerHTML+=txt[i++];
-      }else clearInterval(inter);
-    },50);
+/* GALERIA */
+const mensajes=[
+"Desde que llegaste… todo tiene más sentido 💛",
+"Eres mi paz y mi lugar seguro 🐥❤️",
+"Contigo todo es mejor ✨",
+"Te amo más cada día 💖"
+];
+
+let cont=0, idx=0;
+
+fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos")
+.then(r=>r.json()).then(data=>{
+  const g=document.getElementById("galeria");
+
+  data.forEach(img=>{
+    if(img.name.match(/\.(jpg|jpeg|png|webp)$/i)){
+      let i=document.createElement("img");
+      i.src=img.download_url;
+
+      i.onclick=()=>{
+        modal.style.display="flex";
+        modalImg.src=i.src;
+      };
+
+      g.appendChild(i);
+      cont++;
+
+      if(cont%6===0 && idx<mensajes.length){
+        let m=document.createElement("div");
+        m.className="mensaje";
+        m.innerText=mensajes[idx++];
+        g.appendChild(m);
+
+        setTimeout(()=>{
+          m.style.opacity="1";
+          m.style.transform="translateY(0)";
+        },200);
+      }
+    }
+  });
+});
+
+/* MODAL MEJORADO */
+modal.addEventListener("click", (e)=>{
+  if(e.target === modal){
+    modal.style.display="none";
   }
 });
 
-/* 💖 + ✨ CLICK */
-document.addEventListener("click", e=>{
+/* CORAZONES FLOTANDO */
+setInterval(()=>{
+  const f=document.createElement("div");
+  f.className="flotante";
+  f.innerText=["💖","🐥","💛"][Math.floor(Math.random()*3)];
+  f.style.left=Math.random()*100+"%";
+  f.style.top="100vh";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),8000);
+},1200);
 
+/* CLICK */
+document.addEventListener("click",e=>{
   if(e.target.tagName==="IMG") return;
 
-  /* corazones */
-  const emojis=["💖","💘","💝","🐥"];
   const c=document.createElement("div");
   c.className="corazon-click";
-  c.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+  c.innerText="💖";
   c.style.left=e.clientX+"px";
   c.style.top=e.clientY+"px";
   document.body.appendChild(c);
-  setTimeout(()=>c.remove(),2000);
 
-  /* chispas */
   for(let i=0;i<6;i++){
     const s=document.createElement("div");
     s.className="chispa";
@@ -316,6 +392,37 @@ document.addEventListener("click", e=>{
     setTimeout(()=>s.remove(),1000);
   }
 
+  setTimeout(()=>c.remove(),2000);
+});
+
+/* TEXTO FINAL */
+const txt="Y si la vida me diera mil opciones… mil veces te elegiría a ti mi amor 🐥❤️";
+let fi=0;
+let yaEscribio=false;
+
+window.addEventListener("scroll",()=>{
+  if(window.innerHeight+scrollY>=document.body.offsetHeight-50 && !yaEscribio){
+    yaEscribio=true;
+
+    let inter=setInterval(()=>{
+      if(fi<txt.length){
+        finalText.innerHTML+=txt[fi++];
+      }else clearInterval(inter);
+    },50);
+  }
+});
+
+/* MUSICA */
+let audio = new Audio("musica.mp3");
+audio.loop = true;
+
+let iniciada = false;
+
+document.body.addEventListener("click", () => {
+  if (!iniciada) {
+    audio.play().catch(()=>console.log("Autoplay bloqueado"));
+    iniciada = true;
+  }
 });
 
 </script>
