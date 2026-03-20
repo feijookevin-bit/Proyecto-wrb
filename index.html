@@ -18,6 +18,17 @@ body {
   overflow-x: hidden;
 }
 
+/* OCULTAR CONTENIDO MIENTRAS DURA EL INTRO */
+body.loading #main-content {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+body #main-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* VIDEO */
 #video-bg {
   position: fixed;
@@ -204,41 +215,43 @@ body {
 </style>
 </head>
 
-<body>
+<body class="loading">
 
-<video autoplay loop muted id="video-bg">
-  <source src="viento.mp4" type="video/mp4"> <!-- 🔥 corregido -->
-</video>
-
-<header>
-  <h1 class="titulo-principal">Nuestra historia</h1>
-  <h2 class="subtitulo">✨ Katherine ✨</h2>
-</header>
-
-<div class="container">
-  <div class="card">
-    <h3>⏳ Nuestro tiempo juntos ⌛</h3>
-    <div id="contador"></div>
-  </div>
-
-  <div class="card">
-    <h3>📸 Nuestros recuerdos</h3>
-    <div class="galeria" id="galeria"></div>
-  </div>
-</div>
-
-<footer>
-  <div class="brillo">
-    ✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨
-  </div>
-
-  <div id="finalText"></div>
-
-  <img id="pollito" src="fotos/pollito.png">
-</footer>
-
-<div id="modal"><img id="modalImg"></div>
 <div id="intro"><h1 id="introText"></h1></div>
+
+<div id="main-content">
+
+  <video autoplay loop muted id="video-bg">
+    <source src="viento.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <h1 class="titulo-principal">Nuestra historia</h1>
+    <h2 class="subtitulo">✨ Katherine ✨</h2>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h3>⏳ Nuestro tiempo juntos ⌛</h3>
+      <div id="contador"></div>
+    </div>
+
+    <div class="card">
+      <h3>📸 Nuestros recuerdos</h3>
+      <div class="galeria" id="galeria"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="brillo">
+      ✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨
+    </div>
+    <div id="finalText"></div>
+    <img id="pollito" src="fotos/pollito.png">
+  </footer>
+
+  <div id="modal"><img id="modalImg"></div>
+</div>
 
 <script>
 
@@ -286,7 +299,10 @@ function mostrarTexto(){
     setTimeout(mostrarTexto, 2500);
   } else {
     intro.style.opacity = 0;
-    setTimeout(()=>intro.remove(), 1500);
+    setTimeout(()=>{
+      intro.remove();
+      document.body.classList.remove("loading"); // mostramos contenido principal
+    }, 1500);
   }
 }
 
@@ -437,6 +453,5 @@ document.body.addEventListener("click", () => {
 });
 
 </script>
-
 </body>
 </html>
