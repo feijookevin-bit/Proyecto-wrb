@@ -254,7 +254,6 @@ body #main-content {
 </div>
 
 <script>
-
 /* VARIABLES */
 const contador = document.getElementById("contador");
 const modal = document.getElementById("modal");
@@ -349,35 +348,35 @@ fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos"
   const g=document.getElementById("galeria");
 
   data.forEach(img=>{
-  if(img.name.match(/\.(jpg|jpeg|png|webp)$/i) && img.name !== "pollito.png"){
+    if(img.name.match(/\.(jpg|jpeg|png|webp)$/i) && img.name !== "pollito.png"){
 
-    let imgEl=document.createElement("img");
-    imgEl.src=img.download_url;
+      let imgEl=document.createElement("img");
+      imgEl.src=img.download_url;
 
-    imgEl.onclick=()=>{
-      modal.style.display="flex";
-      modalImg.src=imgEl.src;
-    };
+      imgEl.onclick=()=>{
+        modal.style.display="flex";
+        modalImg.src=imgEl.src;
+      };
 
-    g.appendChild(imgEl);
-    cont++;
+      g.appendChild(imgEl);
+      cont++;
 
-    if(cont%6===0 && idx<mensajes.length){
-      let m=document.createElement("div");
-      m.className="mensaje";
-      m.innerText=mensajes[idx++];
-      g.appendChild(m);
+      if(cont%6===0 && idx<mensajes.length){
+        let m=document.createElement("div");
+        m.className="mensaje";
+        m.innerText=mensajes[idx++];
+        g.appendChild(m);
 
-      setTimeout(()=>{
-        m.style.opacity="1";
-        m.style.transform="translateY(0)";
-      },200);
+        setTimeout(()=>{
+          m.style.opacity="1";
+          m.style.transform="translateY(0)";
+        },200);
+      }
     }
-  }
-});
+  });
 });
 
-/* MODAL MEJORADO */
+/* MODAL */
 modal.addEventListener("click", (e)=>{
   if(e.target === modal){
     modal.style.display="none";
@@ -442,7 +441,6 @@ window.addEventListener("scroll",()=>{
 /* MUSICA */
 let audio = new Audio("musica.mp3");
 audio.loop = true;
-
 let iniciada = false;
 
 document.body.addEventListener("click", () => {
@@ -451,7 +449,7 @@ document.body.addEventListener("click", () => {
     iniciada = true;
   }
 });
-
 </script>
+
 </body>
 </html>
