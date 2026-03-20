@@ -148,21 +148,20 @@ body {
   height:100%;
   background:black;
   display:flex;
+  flex-direction: column;
   justify-content:center;
   align-items:center;
   z-index:9999;
-  transition: opacity 1s ease; /* 🔥 agregado */
+  transition: opacity 1s ease;
 }
-#introText { font-size:2em; }
-
-.star {
-  position:absolute;
-  color:white;
-  animation:floatStar linear infinite;
+#introText {
+  font-size:2em;
+  color: #fff;
+  margin-bottom: 20px;
 }
-@keyframes floatStar {
-  0%{transform:translate(0,0);}
-  100%{transform:translate(var(--x),var(--y));}
+#pollitoIntro {
+  width: 120px;
+  animation: latido 1.5s infinite;
 }
 
 /* CORAZONES FLOTANDO */
@@ -248,40 +247,49 @@ const contador = document.getElementById("contador");
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modalImg");
 const intro = document.getElementById("intro");
+const introText = document.getElementById("introText");
 const finalText = document.getElementById("finalText");
 
-/* INTRO */
-const textos=[
-"Hay historias que no se planean…",
-"pero llegan para cambiarlo todo…",
-"y tú… eres la mía 🐥❤️"
+/* INTRO CON POLLITO */
+const textos = [
+  "Hay historias que no se planean…",
+  "pero llegan para cambiarlo todo…",
+  "y tú… eres la mía 🐥❤️"
 ];
-let i=0;
-const introText=document.getElementById("introText");
 
+let i = 0;
+
+// Creamos el pollito
+const pollitoIntro = document.createElement("img");
+pollitoIntro.src = "fotos/pollito.png";
+pollitoIntro.id = "pollitoIntro";
+intro.appendChild(pollitoIntro);
+
+// Función de estrellas
 function estrellasIntro(){
-  const s=document.createElement("div");
-  s.className="star";
-  s.innerText="✨";
-  s.style.left=Math.random()*100+"%";
-  s.style.top=Math.random()*100+"%";
-  s.style.setProperty('--x',(Math.random()*200-100)+"vw");
-  s.style.setProperty('--y',(Math.random()*200-100)+"vh");
+  const s = document.createElement("div");
+  s.className = "star";
+  s.innerText = "✨";
+  s.style.left = Math.random()*100+"%";
+  s.style.top = Math.random()*100+"%";
+  s.style.setProperty('--x', (Math.random()*200-100)+"vw");
+  s.style.setProperty('--y', (Math.random()*200-100)+"vh");
   intro.appendChild(s);
-
-  setTimeout(()=>s.remove(),10000); // 🔥 evita lag
+  setTimeout(()=>s.remove(), 10000);
 }
-setInterval(estrellasIntro,200);
+setInterval(estrellasIntro, 200);
 
+// Función para mostrar los textos
 function mostrarTexto(){
-  if(i<textos.length){
-    introText.innerText=textos[i++];
-    setTimeout(mostrarTexto,2500);
-  }else{
-    intro.style.opacity=0;
-    setTimeout(()=>intro.remove(),1500);
+  if(i < textos.length){
+    introText.innerText = textos[i++];
+    setTimeout(mostrarTexto, 2500);
+  } else {
+    intro.style.opacity = 0;
+    setTimeout(()=>intro.remove(), 1500);
   }
 }
+
 mostrarTexto();
 
 /* ESTRELLAS PAGINA */
@@ -325,31 +333,32 @@ fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos"
   const g=document.getElementById("galeria");
 
   data.forEach(img=>{
-    if(img.name.match(/\.(jpg|jpeg|png|webp)$/i)){
-      let i=document.createElement("img");
-      i.src=img.download_url;
+  if(img.name.match(/\.(jpg|jpeg|png|webp)$/i) && img.name !== "pollito.png"){
 
-      i.onclick=()=>{
-        modal.style.display="flex";
-        modalImg.src=i.src;
-      };
+    let imgEl=document.createElement("img");
+    imgEl.src=img.download_url;
 
-      g.appendChild(i);
-      cont++;
+    imgEl.onclick=()=>{
+      modal.style.display="flex";
+      modalImg.src=imgEl.src;
+    };
 
-      if(cont%6===0 && idx<mensajes.length){
-        let m=document.createElement("div");
-        m.className="mensaje";
-        m.innerText=mensajes[idx++];
-        g.appendChild(m);
+    g.appendChild(imgEl);
+    cont++;
 
-        setTimeout(()=>{
-          m.style.opacity="1";
-          m.style.transform="translateY(0)";
-        },200);
-      }
+    if(cont%6===0 && idx<mensajes.length){
+      let m=document.createElement("div");
+      m.className="mensaje";
+      m.innerText=mensajes[idx++];
+      g.appendChild(m);
+
+      setTimeout(()=>{
+        m.style.opacity="1";
+        m.style.transform="translateY(0)";
+      },200);
     }
-  });
+  }
+});
 });
 
 /* MODAL MEJORADO */
@@ -372,7 +381,7 @@ setInterval(()=>{
 
 /* CLICK */
 document.addEventListener("click",e=>{
-  if(e.target.tagName==="IMG") return;
+  if(e.target.closest("#modal")) return;
 
   const c=document.createElement("div");
   c.className="corazon-click";
@@ -400,15 +409,17 @@ const txt="Y si la vida me diera mil opciones… mil veces te elegiría a ti mi 
 let fi=0;
 let yaEscribio=false;
 
-window.addEventListener("scroll",()=>{
-  if(window.innerHeight+scrollY>=document.body.offsetHeight-50 && !yaEscribio){
-    yaEscribio=true;
+function escribirFinal(){
+  if(fi<txt.length){
+    finalText.innerHTML+=txt[fi++];
+    setTimeout(escribirFinal,50);
+  }
+}
 
-    let inter=setInterval(()=>{
-      if(fi<txt.length){
-        finalText.innerHTML+=txt[fi++];
-      }else clearInterval(inter);
-    },50);
+window.addEventListener("scroll",()=>{
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 50 && !yaEscribio){
+    yaEscribio = true;
+    escribirFinal();
   }
 });
 
