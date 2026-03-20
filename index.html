@@ -5,87 +5,209 @@
 <title>Nuestra historia 🐥❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fuente para todo -->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
   font-family: 'Great Vibes', cursive;
-  background: linear-gradient(to bottom, #0e0e0e, #1a1a1a);
+  background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
   color: #ff6b81;
   text-align: center;
   overflow-x: hidden;
-  position: relative;
+  scroll-behavior: smooth;
 }
 
-/* Video de fondo tipo viento */
+/* PROFUNDIDAD */
+body::before{
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.9));
+  z-index:-1;
+}
+
+/* VIDEO */
 #video-bg {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  width:100%;
+  height:100%;
   object-fit: cover;
-  z-index: -2;
-  opacity: 0.25;
+  z-index:-2;
+  opacity:0.2;
+  filter: blur(2px);
 }
 
-/* TITULO Y SUBTITULO */
-.titulo-principal { font-size: 3.5em; margin-top: 40px; }
-.subtitulo { font-size: 3em; margin-top: 10px; opacity: 0; animation: fadeIn 2s forwards; }
-@keyframes fadeIn { to {opacity:1;} }
+/* TITULOS */
+.titulo-principal {
+  font-size:3em;
+  margin-top:40px;
+}
+.subtitulo {
+  font-size:2em;
+  margin-top:10px;
+  opacity:0;
+  animation:fadeIn 2s forwards;
+}
+@keyframes fadeIn { to{opacity:1;} }
 
-/* CONTENIDO */
-.container { max-width: 900px; margin: auto; padding: 20px; }
-.card { background: #161616; border-radius: 12px; padding: 20px; margin: 20px 0; position: relative; overflow: hidden; }
-.card h3 { font-size: 2em; display: inline; margin: 0; }
+/* CARDS */
+.container { max-width:900px; margin:auto; padding:20px; }
+.card {
+  background:#141414;
+  border-radius:16px;
+  padding:20px;
+  margin:20px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
 
 /* GALERIA */
-.galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; position: relative; z-index: 1; }
-.galeria img { width: 100%; height: 140px; object-fit: cover; border-radius: 10px; cursor: pointer; position: relative; z-index: 2; }
+.galeria {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;
+  position:relative;
+}
 
-/* DESTELLOS DETRAS DE FOTOS */
-.destello { position: absolute; width: 4px; height: 4px; background: #fff; border-radius: 50%; opacity: 0.8; animation: destelloAnim 3s linear infinite; z-index: 0; }
-@keyframes destelloAnim { 0% {transform: translate(0,0) scale(0);} 50% {transform: translate(0,-20px) scale(1);} 100% {transform: translate(0,-40px) scale(0);} }
+.galeria img {
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+  transition: all .4s ease;
+}
+
+.galeria img:hover {
+  transform:scale(1.1);
+  box-shadow:0 0 20px rgba(255,107,129,0.8);
+}
+
+/* MENSAJES ENTRE FOTOS */
+.mensaje {
+  grid-column:1/-1;
+  text-align:center;
+  font-size:1.3em;
+  color:#ffb3c1;
+  opacity:0;
+  transform:translateY(20px);
+  transition: all 1s ease;
+}
+
+/* DESTELLOS */
+.destello {
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:#fff;
+  border-radius:50%;
+  opacity:0.7;
+  animation:destelloAnim 3s infinite;
+}
+@keyframes destelloAnim {
+  0%{transform:scale(0);}
+  50%{transform:scale(1);}
+  100%{transform:scale(0);}
+}
 
 /* MODAL */
-#modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:9999; }
-#modal img { max-width:90%; }
+#modal {
+  display:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.95);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+#modal img {
+  max-width:90%;
+  border-radius:10px;
+}
 
 /* CONTADOR */
-#contador { font-size: 2em; color: #ffb3c1; }
+#contador { font-size:1.2em; color:#ffb3c1; }
 
 /* FOOTER */
-footer { margin: 40px 0 20px; position: relative; }
-.brillo { position: relative; font-size: 2em; overflow: hidden; }
-.brillo::after { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent); animation: brillo 3s infinite; }
-@keyframes brillo { 0% {left:-100%;} 100% {left:100%;} }
-.espacio { height: 120px; }
+.brillo {
+  font-size:2em;
+  position:relative;
+}
+.brillo::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.8),transparent);
+  animation:brillo 3s infinite;
+}
+@keyframes brillo { from{left:-100%;} to{left:100%;} }
 
-/* INTRO CON DESTELLOS Y ESTRELLITAS */
-#intro { position: fixed; top:0; left:0; width:100%; height:100%; background:black; display:flex; justify-content:center; align-items:center; z-index:9999; transition:opacity 1.5s ease; overflow:hidden; }
-#introText { font-family:'Great Vibes', cursive; font-size:2em; color:#ff6b81; opacity:0; transition:opacity 1s ease; position:relative; z-index:2; }
-
-/* PARTICULAS DE LA INTRO */
-.introParticula {
-  position: absolute;
-  font-size: 12px;
-  opacity: 0.8;
-  color: #fff;
-  pointer-events: none;
-  animation: moverParticula 5s linear infinite;
+/* TEXTO FINAL */
+#finalText {
+  font-size:1.6em;
+  margin-top:30px;
+  color:#ffb3c1;
+  position:relative;
 }
 
-@keyframes moverParticula {
-  0% {transform: translateY(0) translateX(0) scale(0);}
-  50% {transform: translateY(-50vh) translateX(50vw) scale(1);}
-  100% {transform: translateY(-100vh) translateX(100vw) scale(0);}
+/* BRILLO EXTRA */
+#finalText::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:-100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.9),transparent);
+  animation:brillo 4s infinite;
 }
+
+/* POLLITO */
+#pollito {
+  margin-top:20px;
+  width:120px;
+  animation:flotar 3s ease-in-out infinite;
+}
+@keyframes flotar {
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0);}
+}
+
+/* INTRO */
+#intro {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+#introText { font-size:2em; color:#ff6b81; }
+
+/* ESTRELLAS */
+.star {
+  position:absolute;
+  color:white;
+  opacity:0.8;
+  animation: floatStar linear infinite;
+}
+@keyframes floatStar {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(var(--x), var(--y)); }
+}
+
+.espacio { height:120px; }
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO DE FONDO -->
 <video autoplay loop muted id="video-bg">
   <source src="viento.mp4" type="video/mp4">
 </video>
@@ -101,6 +223,7 @@ footer { margin: 40px 0 20px; position: relative; }
     <h3>⏳ Nuestro tiempo juntos ⌛</h3>
     <div id="contador"></div>
   </div>
+
   <div class="card">
     <h3>📸 Nuestros recuerdos</h3>
     <div class="galeria" id="galeria"></div>
@@ -111,34 +234,52 @@ footer { margin: 40px 0 20px; position: relative; }
   <div class="brillo">
     ✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨
   </div>
+
+  <div id="finalText"></div>
+
+  <img id="pollito" src="https://cdn-icons-png.flaticon.com/512/616/616408.png">
+
   <div class="espacio"></div>
 </footer>
 
-<div id="modal">
-  <img id="modalImg">
-</div>
-
+<div id="modal"><img id="modalImg"></div>
 <div id="intro"><h1 id="introText"></h1></div>
 
 <script>
-/* INTRO CON DESTELLOS Y ESTRELLAS */
-const textos = ["Hay historias que no se planean…","pero llegan para cambiarlo todo…","y tú… eres la mía 🐥❤️"];
+
+/* INTRO */
+const textos=[
+"Hay historias que no se planean…",
+"pero llegan para cambiarlo todo…",
+"y tú… eres la mía 🐥❤️"
+];
+
 let i=0;
-const introText = document.getElementById("introText");
-const intro = document.getElementById("intro");
+const introText=document.getElementById("introText");
+const intro=document.getElementById("intro");
 
-// Crear partículas de estrellitas
-for(let j=0;j<50;j++){
-  const part = document.createElement("div");
-  part.className="introParticula";
-  part.innerText = Math.random()>0.5?"✨":"⭐";
-  part.style.left=Math.random()*100+"%";
-  part.style.top=Math.random()*100+"%";
-  part.style.fontSize=(8+Math.random()*8)+"px";
-  intro.appendChild(part);
+function crearEstrella(){
+  const star=document.createElement("div");
+  star.className="star";
+  star.innerText=Math.random()>0.5?"✨":"⭐";
+
+  star.style.left=Math.random()*100+"%";
+  star.style.top=Math.random()*100+"%";
+  star.style.fontSize=(8+Math.random()*10)+"px";
+
+  const x=(Math.random()*200-100)+"vw";
+  const y=(Math.random()*200-100)+"vh";
+
+  star.style.setProperty('--x', x);
+  star.style.setProperty('--y', y);
+  star.style.animationDuration=(6+Math.random()*8)+"s";
+
+  intro.appendChild(star);
+  setTimeout(()=>star.remove(),15000);
 }
+setInterval(crearEstrella,300);
 
-function mostrarTexto() {
+function mostrarTexto(){
   if(i<textos.length){
     introText.style.opacity=0;
     setTimeout(()=>{
@@ -149,7 +290,7 @@ function mostrarTexto() {
     },1000);
   }else{
     intro.style.opacity=0;
-    setTimeout(()=>{ intro.remove(); },1500);
+    setTimeout(()=>intro.remove(),1500);
   }
 }
 mostrarTexto();
@@ -164,27 +305,64 @@ function actualizarContador(){
   const minutos=Math.floor((diff/(1000*60))%60);
   const segundos=Math.floor((diff/1000)%60);
   document.getElementById("contador").innerHTML=
-    `${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos 💖`;
+  `${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos 💖`;
 }
 setInterval(actualizarContador,1000);
 actualizarContador();
 
-/* GALERIA */
+/* GALERIA + MENSAJES */
+const mensajes = [
+"Desde que llegaste… todo tiene más sentido 💛",
+"No sé qué hice para merecerte… pero no pienso soltarte nunca 💖",
+"Eres mi pollito, mi paz y mi lugar seguro 🐥❤️",
+"Contigo… todo es mejor ✨",
+"Antes de ti… todo era normal, contigo todo es especial 💖",
+"Si algún día dudas… recuerda que eres todo para mí 🐥❤️"
+];
+
+let contadorFotos = 0;
+let indexMensaje = 0;
+
 const usuario="feijookevin-bit";
 const repo="Proyecto-wrb";
+
 fetch(`https://api.github.com/repos/${usuario}/${repo}/contents/fotos`)
 .then(res=>res.json())
 .then(data=>{
   const galeria=document.getElementById("galeria");
+
   data.forEach(img=>{
     if(img.name.match(/\.(jpg|jpeg|png|webp)$/i)){
+
       let imagen=document.createElement("img");
       imagen.src=img.download_url;
-      imagen.onclick=()=>{ document.getElementById("modal").style.display="flex"; document.getElementById("modalImg").src=imagen.src; };
+
+      imagen.onclick=()=>{
+        document.getElementById("modal").style.display="flex";
+        document.getElementById("modalImg").src=imagen.src;
+      };
+
       galeria.appendChild(imagen);
+
+      contadorFotos++;
+
+      if(contadorFotos % 6 === 0 && indexMensaje < mensajes.length){
+        let texto=document.createElement("div");
+        texto.className="mensaje";
+        texto.innerText=mensajes[indexMensaje];
+
+        galeria.appendChild(texto);
+
+        setTimeout(()=>{
+          texto.style.opacity="1";
+          texto.style.transform="translateY(0)";
+        },200);
+
+        indexMensaje++;
+      }
     }
   });
-  // Destellos detrás de fotos
+
   for(let i=0;i<30;i++){
     const d=document.createElement("div");
     d.className="destello";
@@ -195,28 +373,38 @@ fetch(`https://api.github.com/repos/${usuario}/${repo}/contents/fotos`)
 });
 
 /* MODAL */
-document.getElementById("modal").onclick=()=>{ document.getElementById("modal").style.display="none"; };
+document.getElementById("modal").onclick=()=>{
+  document.getElementById("modal").style.display="none";
+};
 
 /* MUSICA */
 let audio=new Audio("musica.mp3");
 audio.loop=true;
 let iniciada=false;
-document.body.addEventListener("click",()=>{ if(!iniciada){ audio.play(); iniciada=true; } });
+document.body.addEventListener("click",()=>{
+  if(!iniciada){
+    audio.play();
+    iniciada=true;
+  }
+});
 
-/* CORAZONES Y POLLITOS */
-setInterval(()=>{
-  const el=document.createElement("div");
-  el.innerText=["💖","🐥","💛","💜","💚"][Math.floor(Math.random()*5)];
-  el.style.position="fixed";
-  el.style.left=Math.random()*100+"%";
-  el.style.top="100vh";
-  el.style.fontSize=(16+Math.random()*12)+"px";
-  el.style.pointerEvents="none";
-  el.style.transition="transform 8s linear, opacity 8s linear";
-  document.body.appendChild(el);
-  setTimeout(()=>{ el.style.transform="translateY(-120vh)"; el.style.opacity="0"; },50);
-  setTimeout(()=>el.remove(),8000);
-},1200);
+/* TEXTO FINAL MAQUINA */
+const textoFinal="Y si la vida me diera mil opciones… mil veces te elegiría a ti mi amor 🐥❤️";
+let iFinal=0;
+
+function escribirFinal(){
+  if(iFinal < textoFinal.length){
+    document.getElementById("finalText").innerHTML += textoFinal.charAt(iFinal);
+    iFinal++;
+    setTimeout(escribirFinal,50);
+  }
+}
+
+/* ACTIVAR AL HACER SCROLL */
+window.addEventListener("scroll", ()=>{
+  escribirFinal();
+}, { once:true });
+
 </script>
 
 </body>
