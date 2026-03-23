@@ -80,6 +80,14 @@ body.loading #main-content {
   transform:scale(1.1);  
   box-shadow:0 0 20px rgba(255,107,129,0.8);  
 }  
+
+/* MENSAJES */
+.mensaje {
+  grid-column:1/-1;
+  font-size:1.4em;
+  color:#ffb3c1;
+  margin:10px 0;
+}
   
 .star-bg {  
   position:fixed;  
@@ -133,7 +141,6 @@ body.loading #main-content {
   box-shadow:0 0 25px rgba(255,107,129,0.5);
 }
 
-/* BOTÓN */
 #btnSobre {
   position:absolute;
   top:-40px;
@@ -150,7 +157,6 @@ body.loading #main-content {
   z-index:3;
 }
 
-/* TAPA */
 .tapa {
   position:absolute;
   width:100%;
@@ -162,7 +168,6 @@ body.loading #main-content {
   z-index:2;
 }
 
-/* CARTA */
 .carta {
   position:absolute;
   width:90%;
@@ -185,7 +190,6 @@ body.loading #main-content {
   line-height:1.6;
 }
 
-/* ABIERTO */
 #sobre.abierto .tapa {
   transform:rotateX(180deg);
 }
@@ -193,21 +197,6 @@ body.loading #main-content {
 #sobre.abierto .carta {
   transform:translateY(0);
   opacity:1;
-}
-
-/* BRILLO */
-#sobre.abierto::after {
-  content:"✨";
-  position:absolute;
-  top:-15px;
-  right:-10px;
-  animation:brillo 2s infinite;
-}
-
-@keyframes brillo {
-  0%{opacity:0;transform:scale(0.5);}
-  50%{opacity:1;transform:scale(1.2);}
-  100%{opacity:0;transform:scale(0.5);}
 }
 
 #pollito {
@@ -238,7 +227,6 @@ body.loading #main-content {
   font-size:2em;
   color:white;
 }
-
 </style>  
 </head>  
   
@@ -259,11 +247,6 @@ body.loading #main-content {
   
 <div class="container">  
   <div class="card">  
-    <h3>⏳ Nuestro tiempo juntos ⌛</h3>  
-    <div id="contador"></div>  
-  </div>  
-  
-  <div class="card">  
     <h3>📸 Nuestros recuerdos</h3>  
     <div class="galeria" id="galeria"></div>  
   </div>  
@@ -272,7 +255,6 @@ body.loading #main-content {
 <footer>  
   <div id="finalText"></div>  
 
-  <!-- SOBRE -->
   <div id="sobre">
     <div id="btnSobre">Tócame 💖</div>
     <div class="tapa"></div>
@@ -288,87 +270,55 @@ body.loading #main-content {
 </div>  
   
 <script>  
-const intro = document.getElementById("intro");  
-const introText = document.getElementById("introText");  
 
-const textos = [
-"Hay historias que no se planean…",
-"pero llegan para cambiarlo todo…",
-"y tú… eres la mía 🐥❤️"
+/* MENSAJES PERSONALIZADOS */
+const mensajes = [
+"Ese día contigo… lo repetiría mil veces",
+"No sé cómo haces pero siempre me arreglas el día",
+"Aquí fue donde pensé: uff… me gusta demasiado",
+"Contigo todo se siente más fácil",
+"Esta foto me da paz… por ti",
+"No es la foto… eres tú en ella",
+"Literal, mi lugar favorito eres tú",
+"Siempre termino sonriendo cuando veo esto",
+"Aquí ya estaba bien perdido por ti 😌",
+"Me haces falta incluso cuando estás cerquita"
 ];
 
-let i=0;
+/* GALERÍA + MENSAJES AUTOMÁTICOS */
+const galeria = document.getElementById("galeria");
 
-function mostrarTexto(){
-  if(i<textos.length){
-    introText.innerText=textos[i++];
-    setTimeout(mostrarTexto,2500);
-  }else{
-    intro.style.opacity=0;
-    setTimeout(()=>{
-      intro.remove();
-      document.body.classList.remove("loading");
-      document.getElementById("nombre").classList.add("aparecer");
-    },1500);
-  }
-}
-mostrarTexto();
+/* 👉 SOLO EDITAS TUS FOTOS AQUÍ */
+const fotos = [
+"fotos/1.jpg",
+"fotos/2.jpg",
+"fotos/3.jpg",
+"fotos/4.jpg",
+"fotos/5.jpg",
+"fotos/6.jpg",
+"fotos/7.jpg",
+"fotos/8.jpg",
+"fotos/9.jpg"
+];
 
-/* ESTRELLAS */
-setInterval(()=>{
-  const s=document.createElement("div");
-  s.className="star-bg";
-  s.innerText="✨";
-  s.style.left=Math.random()*100+"%";
-  s.style.top=Math.random()*100+"%";
-  s.style.setProperty('--x',(Math.random()*100-50)+"vw");
-  s.style.setProperty('--y',(Math.random()*100-50)+"vh");
-  document.body.appendChild(s);
-  setTimeout(()=>s.remove(),20000);
-},1500);
+fotos.forEach((src, index) => {
+  const img = document.createElement("img");
+  img.src = src;
+  galeria.appendChild(img);
 
-/* FINAL */
-const finalText=document.getElementById("finalText");
-const sobre=document.getElementById("sobre");
-const cartaTexto=document.getElementById("cartaTexto");
-const btnSobre=document.getElementById("btnSobre");
+  /* cada 6 fotos */
+  if ((index + 1) % 6 === 0) {
+    const mensajeIndex = Math.floor(index / 6);
 
-const txt="Y si la vida me diera mil opciones… mil veces te elegiría a ti mi amor 🐥❤️";
-let fi=0;
-let yaInicioFinal=false;
-
-function escribirFinal(){
-  if(fi<txt.length){
-    finalText.innerHTML+=txt[fi++];
-    setTimeout(escribirFinal,50);
-  }
-}
-
-const mensajeCarta="Mi amor… desde que llegaste a mi vida todo cambió. Eres mi paz, mi alegría y mi hogar 🐥❤️";
-let ci=0;
-
-function escribirCarta(){
-  if(ci<mensajeCarta.length){
-    cartaTexto.innerHTML+=mensajeCarta[ci++];
-    setTimeout(escribirCarta,40);
-  }
-}
-
-/* SCROLL */
-window.addEventListener("scroll",()=>{
-  if(window.innerHeight+window.scrollY>=document.body.offsetHeight-50 && !yaInicioFinal){
-    yaInicioFinal=true;
-    escribirFinal();
+    if (mensajes[mensajeIndex]) {
+      const div = document.createElement("div");
+      div.className = "mensaje";
+      div.innerText = mensajes[mensajeIndex];
+      galeria.appendChild(div);
+    }
   }
 });
 
-/* ABRIR SOBRE */
-btnSobre.addEventListener("click",()=>{
-  sobre.classList.add("abierto");
-  btnSobre.style.display="none";
-  setTimeout(escribirCarta,800);
-});
 </script>  
-  
 </body>  
 </html>
