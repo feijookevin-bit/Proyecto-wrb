@@ -4,9 +4,9 @@
 <meta charset="UTF-8">  
 <title>Nuestra historia 🐥❤️</title>  
 <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  
+
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">  
-  
+
 <style>  
 body {  
   margin: 0;  
@@ -17,13 +17,13 @@ body {
   text-align: center;  
   overflow-x: hidden;  
 }  
-  
+
 body.loading #main-content {  
   opacity: 0;  
   pointer-events: none;  
   transition: opacity 1s ease;  
 }  
-  
+
 #video-bg {  
   position: fixed;  
   width:100%;  
@@ -33,26 +33,26 @@ body.loading #main-content {
   opacity:0.2;  
   filter: blur(2px);  
 }  
-  
+
 .titulo-principal { font-size:3.5em; }  
 .subtitulo { font-size:2.3em; }  
-  
+
 #nombre {  
   opacity: 0;  
   transform: scale(0.5);  
   filter: blur(10px);  
 }  
-  
+
 #nombre.aparecer {  
   animation: aparecerNombre 2s forwards;  
 }  
-  
+
 @keyframes aparecerNombre {  
   0% {opacity:0; transform:scale(0.5); filter:blur(10px);}  
   50% {opacity:1; transform:scale(1.2); filter:blur(0);}  
   100% {transform:scale(1);}  
 }  
-  
+
 .container { max-width:900px; margin:auto; padding:20px; }  
 .card {  
   background:#141414;  
@@ -60,13 +60,13 @@ body.loading #main-content {
   padding:20px;  
   margin:20px 0;  
 }  
-  
+
 .galeria {  
   display:grid;  
   grid-template-columns:repeat(auto-fill,minmax(140px,1fr));  
   gap:10px;  
 }  
-  
+
 .galeria img {  
   width:100%;  
   height:140px;  
@@ -75,88 +75,45 @@ body.loading #main-content {
   cursor:pointer;  
   transition:.4s;  
 }  
-  
+
 .galeria img:hover {  
   transform:scale(1.1);  
   box-shadow:0 0 20px rgba(255,107,129,0.8);  
 }  
 
-/* MENSAJES */
 .mensaje {
   grid-column:1/-1;
   font-size:1.4em;
   color:#ffb3c1;
   margin:10px 0;
 }
-  
-.star-bg {  
-  position:fixed;  
-  color:white;  
-  opacity:0.2;  
-  pointer-events:none;  
-  animation:floatBg linear infinite;  
-}  
-  
-@keyframes floatBg {  
-  0%{transform:translate(0,0);}  
-  100%{transform:translate(var(--x),var(--y));}  
-}  
-  
-#modal {  
-  display:none;  
-  position:fixed;  
-  width:100%;  
-  height:100%;  
-  background:rgba(0,0,0,0.4);  
-  backdrop-filter: blur(10px);  
-  justify-content:center;  
-  align-items:center;  
-  z-index:9999;  
-}  
-  
-#modal img {  
-  max-width:90%;  
-  max-height:90%;  
-  border-radius:12px;  
-}  
-  
-#finalText { font-size:1.8em; margin-top:30px; }  
-  
-/* SOBRE */
+
+/* SOBRE MEJORADO */
 #sobre {
   position: relative;
   width: 280px;
   height: 180px;
-  margin: 50px auto;
+  margin: 60px auto;
   perspective: 1000px;
 }
 
+/* base */
 #sobre::before {
-  content:"";
+  content:"Tócame 💖";
   position:absolute;
   width:100%;
   height:100%;
   background:#ff6b81;
   border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3em;
+  color:white;
   box-shadow:0 0 25px rgba(255,107,129,0.5);
 }
 
-#btnSobre {
-  position:absolute;
-  top:-40px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#ff6b81;
-  color:white;
-  padding:8px 18px;
-  border-radius:20px;
-  cursor:pointer;
-  font-size:1em;
-  box-shadow:0 0 10px rgba(255,107,129,0.6);
-  animation:latido 1.5s infinite;
-  z-index:3;
-}
-
+/* tapa */
 .tapa {
   position:absolute;
   width:100%;
@@ -168,28 +125,36 @@ body.loading #main-content {
   z-index:2;
 }
 
+/* carta */
 .carta {
   position:absolute;
-  width:90%;
-  height:90%;
-  top:5%;
-  left:5%;
-  background:rgba(255,255,255,0.05);
-  border-radius:10px;
-  padding:15px;
-  box-sizing:border-box;
-  transform:translateY(40px);
+  width:85%;
+  height:auto;
+  top:10%;
+  left:7.5%;
+  background:rgba(255,255,255,0.08);
+  border-radius:12px;
+  padding:20px;
+  transform:translateY(60px);
   opacity:0;
   transition:1s;
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(12px);
+  text-align:center;
 }
 
-#cartaTexto {
-  font-size:1.2em;
-  color:#ffdce3;
-  line-height:1.6;
+/* botón dentro de carta */
+#abrirCarta {
+  margin-top:15px;
+  display:inline-block;
+  font-size:1em;
+  color:#ff6b81;
+  border:1px solid #ff6b81;
+  padding:6px 15px;
+  border-radius:20px;
+  cursor:pointer;
 }
 
+/* abierto */
 #sobre.abierto .tapa {
   transform:rotateX(180deg);
 }
@@ -210,6 +175,7 @@ body.loading #main-content {
   100%{transform:scale(1);}
 }
 
+/* INTRO */
 #intro {
   position:fixed;
   width:100%;
@@ -220,105 +186,132 @@ body.loading #main-content {
   justify-content:center;
   align-items:center;
   z-index:9999;
-  transition:opacity 1s ease;
 }
 
 #introText {
   font-size:2em;
-  color:white;
+  color:#ff6b81; /* 🔥 volvió rosado */
 }
 </style>  
 </head>  
-  
+
 <body class="loading">  
-  
+
 <div id="intro"><h1 id="introText"></h1></div>  
-  
+
 <div id="main-content">  
-  
-<video autoplay loop muted id="video-bg">  
-  <source src="viento.mp4" type="video/mp4">  
-</video>  
-  
+
 <header>  
   <h1 class="titulo-principal">Nuestra historia</h1>  
   <h2 class="subtitulo" id="nombre">✨ Katherine ✨</h2>  
 </header>  
-  
+
 <div class="container">  
   <div class="card">  
     <h3>📸 Nuestros recuerdos</h3>  
     <div class="galeria" id="galeria"></div>  
   </div>  
 </div>  
-  
-<footer>  
-  <div id="finalText"></div>  
 
+<footer>  
   <div id="sobre">
-    <div id="btnSobre">Tócame 💖</div>
     <div class="tapa"></div>
     <div class="carta">
       <p id="cartaTexto"></p>
+      <div id="abrirCarta">abrir 💌</div>
     </div>
   </div>
 
   <img id="pollito" src="fotos/pollito.png">  
 </footer>  
-  
-<div id="modal"><img id="modalImg"></div>  
+
 </div>  
-  
+
 <script>  
 
-/* MENSAJES PERSONALIZADOS */
+/* INTRO */
+const textos = [
+"Hay historias que no se planean…",
+"pero llegan para cambiarlo todo…",
+"y tú… eres la mía 🐥❤️"
+];
+
+let i=0;
+const introText=document.getElementById("introText");
+
+function mostrarTexto(){
+  if(i<textos.length){
+    introText.innerText=textos[i++];
+    setTimeout(mostrarTexto,2500);
+  }else{
+    document.getElementById("intro").remove();
+    document.body.classList.remove("loading");
+    document.getElementById("nombre").classList.add("aparecer");
+  }
+}
+mostrarTexto();
+
+/* MENSAJES */
 const mensajes = [
-"Ese día contigo… lo repetiría mil veces",
+" lo repetiría mil veces",
 "No sé cómo haces pero siempre me arreglas el día",
-"Aquí fue donde pensé: uff… me gusta demasiado",
+" uff… me gustas demasiado",
 "Contigo todo se siente más fácil",
-"Esta foto me da paz… por ti",
+" Te Adoro Mi Princesa",
 "No es la foto… eres tú en ella",
 "Literal, mi lugar favorito eres tú",
-"Siempre termino sonriendo cuando veo esto",
-"Aquí ya estaba bien perdido por ti 😌",
-"Me haces falta incluso cuando estás cerquita"
+"Siempre termino sonriendo cuando veo nuestras historias"
 ];
 
-/* GALERÍA + MENSAJES AUTOMÁTICOS */
-const galeria = document.getElementById("galeria");
-
-/* 👉 SOLO EDITAS TUS FOTOS AQUÍ */
+/* FOTOS */
 const fotos = [
-"fotos/1.jpg",
-"fotos/2.jpg",
-"fotos/3.jpg",
-"fotos/4.jpg",
-"fotos/5.jpg",
-"fotos/6.jpg",
-"fotos/7.jpg",
-"fotos/8.jpg",
-"fotos/9.jpg"
+"fotos/1.jpg","fotos/2.jpg","fotos/3.jpg",
+"fotos/4.jpg","fotos/5.jpg","fotos/6.jpg",
+"fotos/7.jpg","fotos/8.jpg","fotos/9.jpg"
 ];
 
-fotos.forEach((src, index) => {
-  const img = document.createElement("img");
-  img.src = src;
+const galeria=document.getElementById("galeria");
+
+fotos.forEach((src,index)=>{
+  const img=document.createElement("img");
+  img.src=src;
   galeria.appendChild(img);
 
-  /* cada 6 fotos */
-  if ((index + 1) % 6 === 0) {
-    const mensajeIndex = Math.floor(index / 6);
-
-    if (mensajes[mensajeIndex]) {
-      const div = document.createElement("div");
-      div.className = "mensaje";
-      div.innerText = mensajes[mensajeIndex];
+  if((index+1)%6===0){
+    const mensajeIndex=Math.floor(index/6);
+    if(mensajes[mensajeIndex]){
+      const div=document.createElement("div");
+      div.className="mensaje";
+      div.innerText=mensajes[mensajeIndex];
       galeria.appendChild(div);
     }
   }
 });
 
+/* SOBRE */
+const sobre=document.getElementById("sobre");
+const cartaTexto=document.getElementById("cartaTexto");
+const abrirCarta=document.getElementById("abrirCarta");
+
+const mensajeCarta="Mi amor… desde que llegaste a mi vida todo cambió. agradezco al destino por haber entrelazado nuestros caminos.. Te Amo Mucho Mas De Lo Que Imaginas 🐥❤️";
+let ci=0;
+
+function escribirCarta(){
+  if(ci<mensajeCarta.length){
+    cartaTexto.innerHTML+=mensajeCarta[ci++];
+    setTimeout(escribirCarta,40);
+  }
+}
+
+sobre.addEventListener("click",()=>{
+  sobre.classList.add("abierto");
+});
+
+abrirCarta.addEventListener("click",(e)=>{
+  e.stopPropagation();
+  escribirCarta();
+});
 </script>  
+
 </body>  
 </html>
