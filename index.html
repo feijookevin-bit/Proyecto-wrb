@@ -1,313 +1,320 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Nuestra historia 🐥❤️</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
-<style>
-body {
-  margin: 0;
-  font-family: 'Great Vibes', cursive;
-  font-size: 20px;
-  background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
-  color: #ff6b81;
-  text-align: center;
-  overflow-x: hidden;
+<!DOCTYPE html>  
+<html lang="es">  
+<head>  
+<meta charset="UTF-8">  
+<title>Nuestra historia 🐥❤️</title>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">  
+  
+<style>  
+body {  
+  margin: 0;  
+  font-family: 'Great Vibes', cursive;  
+  font-size: 20px;  
+  background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);  
+  color: #ff6b81;  
+  text-align: center;  
+  overflow-x: hidden;  
+}  
+  
+body.loading #main-content {  
+  opacity: 0;  
+  pointer-events: none;  
+  transition: opacity 1s ease;  
+}  
+  
+#video-bg {  
+  position: fixed;  
+  width:100%;  
+  height:100%;  
+  object-fit: cover;  
+  z-index:-2;  
+  opacity:0.2;  
+  filter: blur(2px);  
+}  
+  
+.titulo-principal { font-size:3.5em; }  
+.subtitulo { font-size:2.3em; }  
+  
+#nombre {  
+  opacity: 0;  
+  transform: scale(0.5);  
+  filter: blur(10px);  
+}  
+  
+#nombre.aparecer {  
+  animation: aparecerNombre 2s forwards;  
+}  
+  
+@keyframes aparecerNombre {  
+  0% {opacity:0; transform:scale(0.5); filter:blur(10px);}  
+  50% {opacity:1; transform:scale(1.2); filter:blur(0);}  
+  100% {transform:scale(1);}  
+}  
+  
+.container { max-width:900px; margin:auto; padding:20px; }  
+.card {  
+  background:#141414;  
+  border-radius:16px;  
+  padding:20px;  
+  margin:20px 0;  
+}  
+  
+.galeria {  
+  display:grid;  
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));  
+  gap:10px;  
+}  
+  
+.galeria img {  
+  width:100%;  
+  height:140px;  
+  object-fit:cover;  
+  border-radius:12px;  
+  cursor:pointer;  
+  transition:.4s;  
+}  
+  
+.galeria img:hover {  
+  transform:scale(1.1);  
+  box-shadow:0 0 20px rgba(255,107,129,0.8);  
+}  
+  
+.star-bg {  
+  position:fixed;  
+  color:white;  
+  opacity:0.2;  
+  pointer-events:none;  
+  animation:floatBg linear infinite;  
+}  
+  
+@keyframes floatBg {  
+  0%{transform:translate(0,0);}  
+  100%{transform:translate(var(--x),var(--y));}  
+}  
+  
+#modal {  
+  display:none;  
+  position:fixed;  
+  width:100%;  
+  height:100%;  
+  background:rgba(0,0,0,0.4);  
+  backdrop-filter: blur(10px);  
+  justify-content:center;  
+  align-items:center;  
+  z-index:9999;  
+}  
+  
+#modal img {  
+  max-width:90%;  
+  max-height:90%;  
+  border-radius:12px;  
+}  
+  
+#finalText { font-size:1.8em; margin-top:30px; }  
+  
+/* SOBRE */
+#sobre {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  margin: 50px auto;
+  perspective: 1000px;
 }
 
-/* OCULTAR CONTENIDO MIENTRAS DURA EL INTRO */
-body.loading #main-content {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease;
-}
-body #main-content {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* VIDEO */
-#video-bg {
-  position: fixed;
-  width:100%;
-  height:100%;
-  object-fit: cover;
-  z-index:-2;
-  opacity:0.2;
-  filter: blur(2px);
-}
-
-/* TITULOS */
-.titulo-principal { font-size:3.5em; }
-.subtitulo { font-size:2.3em; opacity:0; animation:fadeIn 2s forwards; }
-
-/* CARDS */
-.container { max-width:900px; margin:auto; padding:20px; }
-.card {
-  background:#141414;
-  border-radius:16px;
-  padding:20px;
-  margin:20px 0;
-}
-
-/* GALERIA */
-.galeria {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
-  gap:10px;
-}
-.galeria img {
-  width:100%;
-  height:140px;
-  object-fit:cover;
-  border-radius:12px;
-  cursor:pointer;
-  transition:.4s;
-}
-.galeria img:hover {
-  transform:scale(1.1);
-  box-shadow:0 0 20px rgba(255,107,129,0.8);
-}
-
-/* MENSAJES */
-.mensaje {
-  grid-column:1/-1;
-  font-size:1.5em;
-  color:#ffb3c1;
-  opacity:0;
-  transform:translateY(20px);
-  transition:1s;
-}
-
-/* ESTRELLAS */
-.star-bg {
-  position:fixed;
-  color:white;
-  opacity:0.2;
-  pointer-events:none;
-  animation:floatBg linear infinite;
-}
-@keyframes floatBg {
-  0%{transform:translate(0,0);}
-  100%{transform:translate(var(--x),var(--y));}
-}
-
-/* MODAL */
-#modal {
-  display:none;
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter: blur(10px);
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-#modal img {
-  max-width:90%;
-  max-height:90%;
-  border-radius:12px;
-  animation:zoom .3s ease, neonPulse 2s infinite;
-}
-@keyframes zoom {
-  from{transform:scale(0.7);opacity:0;}
-  to{transform:scale(1);opacity:1;}
-}
-@keyframes neonPulse {
-  0%{box-shadow:0 0 10px #ff6b81;}
-  50%{box-shadow:0 0 40px #ff6b81;}
-  100%{box-shadow:0 0 10px #ff6b81;}
-}
-
-/* TEXTO FINAL */
-#finalText { font-size:1.8em; margin-top:30px; }
-
-/* FRASE ORIGINAL */
-.brillo {
-  font-size:2em;
-  margin-top:40px;
-  position:relative;
-}
-.brillo::after{
+#sobre::before {
   content:"";
   position:absolute;
   width:100%;
   height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.8),transparent);
-  animation:brillo 3s infinite;
+  background:#ff6b81;
+  border-radius:10px;
+  box-shadow:0 0 25px rgba(255,107,129,0.5);
 }
 
-/* POLLITO */
+/* BOTÓN */
+#btnSobre {
+  position:absolute;
+  top:-40px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#ff6b81;
+  color:white;
+  padding:8px 18px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:1em;
+  box-shadow:0 0 10px rgba(255,107,129,0.6);
+  animation:latido 1.5s infinite;
+  z-index:3;
+}
+
+/* TAPA */
+.tapa {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#ff4d6d;
+  clip-path:polygon(0 0,100% 0,50% 60%);
+  transform-origin:top;
+  transition:1s;
+  z-index:2;
+}
+
+/* CARTA */
+.carta {
+  position:absolute;
+  width:90%;
+  height:90%;
+  top:5%;
+  left:5%;
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+  padding:15px;
+  box-sizing:border-box;
+  transform:translateY(40px);
+  opacity:0;
+  transition:1s;
+  backdrop-filter:blur(10px);
+}
+
+#cartaTexto {
+  font-size:1.2em;
+  color:#ffdce3;
+  line-height:1.6;
+}
+
+/* ABIERTO */
+#sobre.abierto .tapa {
+  transform:rotateX(180deg);
+}
+
+#sobre.abierto .carta {
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* BRILLO */
+#sobre.abierto::after {
+  content:"✨";
+  position:absolute;
+  top:-15px;
+  right:-10px;
+  animation:brillo 2s infinite;
+}
+
+@keyframes brillo {
+  0%{opacity:0;transform:scale(0.5);}
+  50%{opacity:1;transform:scale(1.2);}
+  100%{opacity:0;transform:scale(0.5);}
+}
+
 #pollito {
   width:120px;
   animation:latido 1.5s infinite;
 }
+
 @keyframes latido {
   0%{transform:scale(1);}
   50%{transform:scale(1.1);}
   100%{transform:scale(1);}
 }
 
-/* INTRO */
 #intro {
   position:fixed;
   width:100%;
   height:100%;
   background:black;
   display:flex;
-  flex-direction: column;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
   z-index:9999;
-  transition: opacity 1s ease;
+  transition:opacity 1s ease;
 }
+
 #introText {
   font-size:2em;
-  color: #fff;
-  margin-bottom: 20px;
-}
-#pollitoIntro {
-  width: 120px;
-  animation: latido 1.5s infinite;
+  color:white;
 }
 
-/* CORAZONES FLOTANDO */
-.flotante {
-  position:fixed;
-  pointer-events:none;
-  font-size:20px;
-  animation:subir 8s linear forwards;
-}
-@keyframes subir {
-  to{transform:translateY(-120vh);opacity:0;}
-}
+</style>  
+</head>  
+  
+<body class="loading">  
+  
+<div id="intro"><h1 id="introText"></h1></div>  
+  
+<div id="main-content">  
+  
+<video autoplay loop muted id="video-bg">  
+  <source src="viento.mp4" type="video/mp4">  
+</video>  
+  
+<header>  
+  <h1 class="titulo-principal">Nuestra historia</h1>  
+  <h2 class="subtitulo" id="nombre">✨ Katherine ✨</h2>  
+</header>  
+  
+<div class="container">  
+  <div class="card">  
+    <h3>⏳ Nuestro tiempo juntos ⌛</h3>  
+    <div id="contador"></div>  
+  </div>  
+  
+  <div class="card">  
+    <h3>📸 Nuestros recuerdos</h3>  
+    <div class="galeria" id="galeria"></div>  
+  </div>  
+</div>  
+  
+<footer>  
+  <div id="finalText"></div>  
 
-/* CLICK */
-.corazon-click {
-  position:fixed;
-  pointer-events:none;
-  animation:subirCorazon 2s forwards;
-}
-@keyframes subirCorazon {
-  to{transform:translateY(-120px);opacity:0;}
-}
-
-/* CHISPAS */
-.chispa {
-  position:fixed;
-  width:4px;
-  height:4px;
-  background:#fff;
-  border-radius:50%;
-  animation:chispaAnim 1s forwards;
-}
-@keyframes chispaAnim {
-  to{transform:translate(var(--x),var(--y));opacity:0;}
-}
-
-@keyframes fadeIn { to{opacity:1;} }
-@keyframes brillo { from{left:-100%;} to{left:100%;} }
-
-</style>
-</head>
-
-<body class="loading">
-
-<div id="intro"><h1 id="introText"></h1></div>
-
-<div id="main-content">
-
-  <video autoplay loop muted id="video-bg">
-    <source src="viento.mp4" type="video/mp4">
-  </video>
-
-  <header>
-    <h1 class="titulo-principal">Nuestra historia</h1>
-    <h2 class="subtitulo">✨ Katherine ✨</h2>
-  </header>
-
-  <div class="container">
-    <div class="card">
-      <h3>⏳ Nuestro tiempo juntos ⌛</h3>
-      <div id="contador"></div>
-    </div>
-
-    <div class="card">
-      <h3>📸 Nuestros recuerdos</h3>
-      <div class="galeria" id="galeria"></div>
+  <!-- SOBRE -->
+  <div id="sobre">
+    <div id="btnSobre">Tócame 💖</div>
+    <div class="tapa"></div>
+    <div class="carta">
+      <p id="cartaTexto"></p>
     </div>
   </div>
 
-  <footer>
-    <div class="brillo">
-      ✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨
-    </div>
-    <div id="finalText"></div>
-    <img id="pollito" src="fotos/pollito.png">
-  </footer>
+  <img id="pollito" src="fotos/pollito.png">  
+</footer>  
+  
+<div id="modal"><img id="modalImg"></div>  
+</div>  
+  
+<script>  
+const intro = document.getElementById("intro");  
+const introText = document.getElementById("introText");  
 
-  <div id="modal"><img id="modalImg"></div>
-</div>
-
-<script>
-/* VARIABLES */
-const contador = document.getElementById("contador");
-const modal = document.getElementById("modal");
-const modalImg = document.getElementById("modalImg");
-const intro = document.getElementById("intro");
-const introText = document.getElementById("introText");
-const finalText = document.getElementById("finalText");
-
-/* INTRO CON POLLITO */
 const textos = [
-  "Hay historias que no se planean…",
-  "pero llegan para cambiarlo todo…",
-  "y tú… eres la mía 🐥❤️"
+"Hay historias que no se planean…",
+"pero llegan para cambiarlo todo…",
+"y tú… eres la mía 🐥❤️"
 ];
 
-let i = 0;
+let i=0;
 
-// Creamos el pollito
-const pollitoIntro = document.createElement("img");
-pollitoIntro.src = "fotos/pollito.png";
-pollitoIntro.id = "pollitoIntro";
-intro.appendChild(pollitoIntro);
-
-// Función de estrellas
-function estrellasIntro(){
-  const s = document.createElement("div");
-  s.className = "star";
-  s.innerText = "✨";
-  s.style.left = Math.random()*100+"%";
-  s.style.top = Math.random()*100+"%";
-  s.style.setProperty('--x', (Math.random()*200-100)+"vw");
-  s.style.setProperty('--y', (Math.random()*200-100)+"vh");
-  intro.appendChild(s);
-  setTimeout(()=>s.remove(), 10000);
-}
-setInterval(estrellasIntro, 200);
-
-// Función para mostrar los textos
 function mostrarTexto(){
-  if(i < textos.length){
-    introText.innerText = textos[i++];
-    setTimeout(mostrarTexto, 2500);
-  } else {
-    intro.style.opacity = 0;
+  if(i<textos.length){
+    introText.innerText=textos[i++];
+    setTimeout(mostrarTexto,2500);
+  }else{
+    intro.style.opacity=0;
     setTimeout(()=>{
       intro.remove();
-      document.body.classList.remove("loading"); // mostramos contenido principal
-    }, 1500);
+      document.body.classList.remove("loading");
+      document.getElementById("nombre").classList.add("aparecer");
+    },1500);
   }
 }
-
 mostrarTexto();
 
-/* ESTRELLAS PAGINA */
+/* ESTRELLAS */
 setInterval(()=>{
   const s=document.createElement("div");
   s.className="star-bg";
@@ -318,111 +325,17 @@ setInterval(()=>{
   s.style.setProperty('--y',(Math.random()*100-50)+"vh");
   document.body.appendChild(s);
   setTimeout(()=>s.remove(),20000);
-},800);
+},1500);
 
-/* CONTADOR */
-const inicio=new Date("2025-10-13");
-setInterval(()=>{
-  const d=new Date()-inicio;
-  const dias=Math.floor(d/86400000);
-  const horas=Math.floor((d/3600000)%24);
-  const min=Math.floor((d/60000)%60);
-  const seg=Math.floor((d/1000)%60);
+/* FINAL */
+const finalText=document.getElementById("finalText");
+const sobre=document.getElementById("sobre");
+const cartaTexto=document.getElementById("cartaTexto");
+const btnSobre=document.getElementById("btnSobre");
 
-  contador.innerHTML=
-  `${dias} días, ${horas} horas, ${min} minutos y ${seg} segundos contigo… y quiero toda la vida 💖`;
-},1000);
-
-/* GALERIA */
-const mensajes=[
-"Desde que llegaste… todo tiene más sentido 💛",
-"Eres mi paz y mi lugar seguro 🐥❤️",
-"Contigo todo es mejor ✨",
-"Te amo más cada día 💖"
-];
-
-let cont=0, idx=0;
-
-fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos")
-.then(r=>r.json()).then(data=>{
-  const g=document.getElementById("galeria");
-
-  data.forEach(img=>{
-    if(img.name.match(/\.(jpg|jpeg|png|webp)$/i) && img.name !== "pollito.png"){
-
-      let imgEl=document.createElement("img");
-      imgEl.src=img.download_url;
-
-      imgEl.onclick=()=>{
-        modal.style.display="flex";
-        modalImg.src=imgEl.src;
-      };
-
-      g.appendChild(imgEl);
-      cont++;
-
-      if(cont%6===0 && idx<mensajes.length){
-        let m=document.createElement("div");
-        m.className="mensaje";
-        m.innerText=mensajes[idx++];
-        g.appendChild(m);
-
-        setTimeout(()=>{
-          m.style.opacity="1";
-          m.style.transform="translateY(0)";
-        },200);
-      }
-    }
-  });
-});
-
-/* MODAL */
-modal.addEventListener("click", (e)=>{
-  if(e.target === modal){
-    modal.style.display="none";
-  }
-});
-
-/* CORAZONES FLOTANDO */
-setInterval(()=>{
-  const f=document.createElement("div");
-  f.className="flotante";
-  f.innerText=["💖","🐥","💛"][Math.floor(Math.random()*3)];
-  f.style.left=Math.random()*100+"%";
-  f.style.top="100vh";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),8000);
-},1200);
-
-/* CLICK */
-document.addEventListener("click",e=>{
-  if(e.target.closest("#modal")) return;
-
-  const c=document.createElement("div");
-  c.className="corazon-click";
-  c.innerText="💖";
-  c.style.left=e.clientX+"px";
-  c.style.top=e.clientY+"px";
-  document.body.appendChild(c);
-
-  for(let i=0;i<6;i++){
-    const s=document.createElement("div");
-    s.className="chispa";
-    s.style.left=e.clientX+"px";
-    s.style.top=e.clientY+"px";
-    s.style.setProperty('--x',(Math.random()*100-50)+"px");
-    s.style.setProperty('--y',(Math.random()*100-50)+"px");
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),1000);
-  }
-
-  setTimeout(()=>c.remove(),2000);
-});
-
-/* TEXTO FINAL */
 const txt="Y si la vida me diera mil opciones… mil veces te elegiría a ti mi amor 🐥❤️";
 let fi=0;
-let yaEscribio=false;
+let yaInicioFinal=false;
 
 function escribirFinal(){
   if(fi<txt.length){
@@ -431,25 +344,31 @@ function escribirFinal(){
   }
 }
 
+const mensajeCarta="Mi amor… desde que llegaste a mi vida todo cambió. Eres mi paz, mi alegría y mi hogar 🐥❤️";
+let ci=0;
+
+function escribirCarta(){
+  if(ci<mensajeCarta.length){
+    cartaTexto.innerHTML+=mensajeCarta[ci++];
+    setTimeout(escribirCarta,40);
+  }
+}
+
+/* SCROLL */
 window.addEventListener("scroll",()=>{
-  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 50 && !yaEscribio){
-    yaEscribio = true;
+  if(window.innerHeight+window.scrollY>=document.body.offsetHeight-50 && !yaInicioFinal){
+    yaInicioFinal=true;
     escribirFinal();
   }
 });
 
-/* MUSICA */
-let audio = new Audio("musica.mp3");
-audio.loop = true;
-let iniciada = false;
-
-document.body.addEventListener("click", () => {
-  if (!iniciada) {
-    audio.play().catch(()=>console.log("Autoplay bloqueado"));
-    iniciada = true;
-  }
+/* ABRIR SOBRE */
+btnSobre.addEventListener("click",()=>{
+  sobre.classList.add("abierto");
+  btnSobre.style.display="none";
+  setTimeout(escribirCarta,800);
 });
-</script>
-
-</body>
+</script>  
+  
+</body>  
 </html>
