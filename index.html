@@ -353,21 +353,84 @@ document.getElementById("sobre").classList.add("abierto");
 setTimeout(escribirCarta,600);
 };
 
-/* CORAZONES */
+
+/* 🌫️ 70% POLVO DE LUZ */
 setInterval(()=>{
-const c=document.createElement("div");
-c.innerText=["💖","🐥"][Math.floor(Math.random()*2)];
-c.style.position="fixed";
-c.style.left=Math.random()*100+"%";
-c.style.bottom="0";
-c.style.fontSize="20px";
-c.style.transition="transform 6s linear, opacity 6s";
-document.body.appendChild(c);
-setTimeout(()=>{
-c.style.transform="translateY(-120vh)";
-c.style.opacity="0";
-},50);
-setTimeout(()=>c.remove(),6000);
+  const p=document.createElement("div");
+
+  p.style.position="fixed";
+  p.style.width="3px";
+  p.style.height="3px";
+  p.style.background="rgba(255,182,193,0.5)";
+  p.style.borderRadius="50%";
+  p.style.left=Math.random()*100+"%";
+  p.style.bottom="0";
+  p.style.pointerEvents="none";
+  p.style.filter="blur(1px)";
+
+  p.style.transition="transform 10s linear, opacity 10s";
+
+  document.body.appendChild(p);
+
+  setTimeout(()=>{
+    p.style.transform="translateY(-120vh)";
+    p.style.opacity="0";
+  },50);
+
+  setTimeout(()=>p.remove(),10000);
+
+},400); // puedes subir a 500 si quieres más fluido
+
+
+/* ✨ 20% DESTELLOS SUAVES */
+setInterval(()=>{
+  const d=document.createElement("div");
+
+  d.style.position="fixed";
+  d.style.width="4px";
+  d.style.height="4px";
+  d.style.background="white";
+  d.style.borderRadius="50%";
+  d.style.left=Math.random()*100+"%";
+  d.style.top=Math.random()*100+"%";
+  d.style.opacity="0";
+  d.style.pointerEvents="none";
+  d.style.boxShadow="0 0 10px #fff";
+
+  document.body.appendChild(d);
+
+  setTimeout(()=>d.style.opacity="1",50);
+  setTimeout(()=>d.style.opacity="0",800);
+  setTimeout(()=>d.remove(),1200);
+
+},900);
+
+
+/* 💖 10% CORAZONES ELEGANTES */
+setInterval(()=>{
+  if(Math.random()>0.1) return; // pocos corazones
+
+  const c=document.createElement("div");
+  c.innerText="💖";
+
+  c.style.position="fixed";
+  c.style.left=Math.random()*100+"%";
+  c.style.bottom="0";
+  c.style.fontSize="16px";
+  c.style.opacity="0.7";
+  c.style.pointerEvents="none";
+
+  c.style.transition="transform 6s linear, opacity 6s";
+
+  document.body.appendChild(c);
+
+  setTimeout(()=>{
+    c.style.transform="translateY(-100vh)";
+    c.style.opacity="0";
+  },50);
+
+  setTimeout(()=>c.remove(),6000);
+
 },1200);
 
 </script>
