@@ -1,317 +1,342 @@
-<!DOCTYPE html>  
-<html lang="es">  
-<head>  
-<meta charset="UTF-8">  
-<title>Nuestra historia 🐥❤️</title>  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Nuestra historia 🐥❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">  
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
-<style>  
-body {  
-  margin: 0;  
-  font-family: 'Great Vibes', cursive;  
-  font-size: 20px;  
-  background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);  
-  color: #ff6b81;  
-  text-align: center;  
-  overflow-x: hidden;  
-}  
-
-body.loading #main-content {  
-  opacity: 0;  
-  pointer-events: none;  
-  transition: opacity 1s ease;  
-}  
-
-#video-bg {  
-  position: fixed;  
-  width:100%;  
-  height:100%;  
-  object-fit: cover;  
-  z-index:-2;  
-  opacity:0.2;  
-  filter: blur(2px);  
-}  
-
-.titulo-principal { font-size:3.5em; }  
-.subtitulo { font-size:2.3em; }  
-
-#nombre {  
-  opacity: 0;  
-  transform: scale(0.5);  
-  filter: blur(10px);  
-}  
-
-#nombre.aparecer {  
-  animation: aparecerNombre 2s forwards;  
-}  
-
-@keyframes aparecerNombre {  
-  0% {opacity:0; transform:scale(0.5); filter:blur(10px);}  
-  50% {opacity:1; transform:scale(1.2); filter:blur(0);}  
-  100% {transform:scale(1);}  
-}  
-
-.container { max-width:900px; margin:auto; padding:20px; }  
-.card {  
-  background:#141414;  
-  border-radius:16px;  
-  padding:20px;  
-  margin:20px 0;  
-}  
-
-.galeria {  
-  display:grid;  
-  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));  
-  gap:10px;  
-}  
-
-.galeria img {  
-  width:100%;  
-  height:140px;  
-  object-fit:cover;  
-  border-radius:12px;  
-  cursor:pointer;  
-  transition:.4s;  
-}  
-
-.galeria img:hover {  
-  transform:scale(1.1);  
-  box-shadow:0 0 20px rgba(255,107,129,0.8);  
-}  
-
-.mensaje {
-  grid-column:1/-1;
-  font-size:1.4em;
-  color:#ffb3c1;
-  margin:10px 0;
-}
-
-/* SOBRE MEJORADO */
-#sobre {
-  position: relative;
-  width: 280px;
-  height: 180px;
-  margin: 60px auto;
-  perspective: 1000px;
-}
-
-/* base */
-#sobre::before {
-  content:"Tócame 💖";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:#ff6b81;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.3em;
-  color:white;
-  box-shadow:0 0 25px rgba(255,107,129,0.5);
-}
-
-/* tapa */
-.tapa {
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:#ff4d6d;
-  clip-path:polygon(0 0,100% 0,50% 60%);
-  transform-origin:top;
-  transition:1s;
-  z-index:2;
-}
-
-/* carta */
-.carta {
-  position:absolute;
-  width:85%;
-  height:auto;
-  top:10%;
-  left:7.5%;
-  background:rgba(255,255,255,0.08);
-  border-radius:12px;
-  padding:20px;
-  transform:translateY(60px);
-  opacity:0;
-  transition:1s;
-  backdrop-filter:blur(12px);
-  text-align:center;
-}
-
-/* botón dentro de carta */
-#abrirCarta {
-  margin-top:15px;
-  display:inline-block;
-  font-size:1em;
-  color:#ff6b81;
-  border:1px solid #ff6b81;
-  padding:6px 15px;
-  border-radius:20px;
-  cursor:pointer;
-}
-
-/* abierto */
-#sobre.abierto .tapa {
-  transform:rotateX(180deg);
-}
-
-#sobre.abierto .carta {
-  transform:translateY(0);
-  opacity:1;
-}
-
-#pollito {
-  width:120px;
-  animation:latido 1.5s infinite;
-}
-
-@keyframes latido {
-  0%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-  100%{transform:scale(1);}
+<style>
+body{
+margin:0;
+font-family:'Great Vibes',cursive;
+background:linear-gradient(to bottom,#0a0a0a,#1a1a1a);
+color:#ff6b81;
+text-align:center;
+overflow-x:hidden;
 }
 
 /* INTRO */
-#intro {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+#introText{font-size:2em;color:#ff6b81}
+
+/* CONTADOR */
+#contador{margin-top:20px;font-size:1.5em}
+
+/* GALERIA */
+.galeria{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+gap:10px;
+padding:20px;
+}
+.galeria img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:12px;
+cursor:pointer;
+transition:.4s;
+animation:brillo 3s infinite alternate;
+}
+.galeria img:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px rgba(255,107,129,0.8);
 }
 
-#introText {
-  font-size:2em;
-  color:#ff6b81; /* 🔥 volvió rosado */
+/* BRILLO */
+@keyframes brillo{
+from{box-shadow:0 0 10px rgba(255,107,129,0.2)}
+to{box-shadow:0 0 25px rgba(255,107,129,0.6)}
 }
-</style>  
-</head>  
 
-<body class="loading">  
+/* MENSAJES */
+.mensaje{
+grid-column:1/-1;
+font-size:1.3em;
+color:#ffb3c1;
+}
 
-<div id="intro"><h1 id="introText"></h1></div>  
+/* MODAL CINEMÁTICO */
+#modal{
+display:none;
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.95);
+justify-content:center;
+align-items:center;
+z-index:9999;
+overflow:hidden;
+}
+#modal img{
+max-width:90%;
+max-height:90%;
+border-radius:12px;
+animation:cine 10s ease-in-out infinite alternate;
+}
+@keyframes cine{
+0%{transform:scale(1)}
+100%{transform:scale(1.1)}
+}
 
-<div id="main-content">  
+/* SOBRE */
+#sobre{
+position:relative;
+width:280px;
+height:180px;
+margin:60px auto;
+perspective:1000px;
+}
+#sobre::before{
+content:"Tócame 💖";
+position:absolute;
+width:100%;
+height:100%;
+background:#ff6b81;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+box-shadow:0 0 25px rgba(255,107,129,0.5);
+}
+.tapa{
+position:absolute;
+width:100%;
+height:100%;
+background:#ff4d6d;
+clip-path:polygon(0 0,100% 0,50% 60%);
+transform-origin:top;
+transition:1s;
+}
+.carta{
+position:absolute;
+width:85%;
+top:10%;
+left:7.5%;
+background:rgba(255,255,255,0.08);
+border-radius:12px;
+padding:20px;
+transform:translateY(60px);
+opacity:0;
+transition:1s;
+}
+#sobre.abierto .tapa{transform:rotateX(180deg)}
+#sobre.abierto .carta{
+transform:translateY(0);
+opacity:1;
+}
+#abrirCarta{
+margin-top:10px;
+border:1px solid #ff6b81;
+padding:5px 15px;
+border-radius:20px;
+cursor:pointer;
+}
 
-<header>  
-  <h1 class="titulo-principal">Nuestra historia</h1>  
-  <h2 class="subtitulo" id="nombre">✨ Katherine ✨</h2>  
-</header>  
+/* POLLITO */
+#pollito{
+width:120px;
+margin-top:20px;
+animation:latido 1.5s infinite;
+}
+@keyframes latido{
+50%{transform:scale(1.1)}
+}
 
-<div class="container">  
-  <div class="card">  
-    <h3>📸 Nuestros recuerdos</h3>  
-    <div class="galeria" id="galeria"></div>  
-  </div>  
-</div>  
+/* ESTRELLAS */
+.star{
+position:fixed;
+color:white;
+opacity:0.2;
+animation:flotar 10s linear infinite;
+}
+@keyframes flotar{
+0%{transform:translateY(0)}
+100%{transform:translateY(-100vh)}
+}
+</style>
+</head>
 
-<footer>  
-  <div id="sobre">
-    <div class="tapa"></div>
-    <div class="carta">
-      <p id="cartaTexto"></p>
-      <div id="abrirCarta">abrir 💌</div>
-    </div>
-  </div>
+<body>
 
-  <img id="pollito" src="fotos/pollito.png">  
-</footer>  
+<div id="intro"><h1 id="introText"></h1></div>
 
-</div>  
+<h1>Nuestra historia</h1>
+<h2>✨ Katherine ✨</h2>
 
-<script>  
+<div id="contador"></div>
+
+<div class="galeria" id="galeria"></div>
+
+<footer>
+<div id="sobre">
+<div class="tapa"></div>
+<div class="carta">
+<p id="cartaTexto"></p>
+<div id="abrirCarta">abrir 💌</div>
+</div>
+</div>
+
+<img id="pollito" src="fotos/pollito.png">
+</footer>
+
+<div id="modal"><img id="modalImg"></div>
+
+<script>
 
 /* INTRO */
-const textos = [
+const textos=[
 "Hay historias que no se planean…",
 "pero llegan para cambiarlo todo…",
 "y tú… eres la mía 🐥❤️"
 ];
-
-let i=0;
-const introText=document.getElementById("introText");
-
-function mostrarTexto(){
-  if(i<textos.length){
-    introText.innerText=textos[i++];
-    setTimeout(mostrarTexto,2500);
-  }else{
-    document.getElementById("intro").remove();
-    document.body.classList.remove("loading");
-    document.getElementById("nombre").classList.add("aparecer");
-  }
+let ti=0;
+function introAnim(){
+if(ti<textos.length){
+document.getElementById("introText").innerText=textos[ti++];
+setTimeout(introAnim,2500);
+}else{
+document.getElementById("intro").remove();
 }
-mostrarTexto();
+}
+introAnim();
+
+/* CONTADOR */
+const inicio=new Date("2025-10-13");
+setInterval(()=>{
+const ahora=new Date();
+const diff=ahora-inicio;
+
+const d=Math.floor(diff/(1000*60*60*24));
+const h=Math.floor(diff/(1000*60*60)%24);
+const m=Math.floor(diff/(1000*60)%60);
+const s=Math.floor(diff/1000%60);
+
+document.getElementById("contador").innerHTML=
+`Desde que empezó lo nuestro 💖<br>${d} días ${h}h ${m}m ${s}s`;
+},1000);
 
 /* MENSAJES */
-const mensajes = [
-" lo repetiría mil veces",
+const mensajes=[
+"lo repetiría mil veces",
 "No sé cómo haces pero siempre me arreglas el día",
-" uff… me gustas demasiado",
-"Contigo todo se siente más fácil",
-" Te Adoro Mi Princesa",
+"uff… me gustas demasiado",
+"Contigo todo se siente de película",
+"Te Adoro Mi Princesa",
 "No es la foto… eres tú en ella",
 "Literal, mi lugar favorito eres tú",
 "Siempre termino sonriendo cuando veo nuestras historias"
 ];
 
-/* FOTOS */
-const fotos = [
-"fotos/1.jpg","fotos/2.jpg","fotos/3.jpg",
-"fotos/4.jpg","fotos/5.jpg","fotos/6.jpg",
-"fotos/7.jpg","fotos/8.jpg","fotos/9.jpg"
-];
-
+/* GALERIA AUTOMATICA + ORDEN */
 const galeria=document.getElementById("galeria");
 
-fotos.forEach((src,index)=>{
-  const img=document.createElement("img");
-  img.src=src;
-  galeria.appendChild(img);
+fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos")
+.then(res=>res.json())
+.then(data=>{
 
-  if((index+1)%6===0){
-    const mensajeIndex=Math.floor(index/6);
-    if(mensajes[mensajeIndex]){
-      const div=document.createElement("div");
-      div.className="mensaje";
-      div.innerText=mensajes[mensajeIndex];
-      galeria.appendChild(div);
-    }
-  }
+const imgs=data
+.filter(f=>f.type==="file" && /\.(jpg|png|jpeg|webp)$/i.test(f.name) && f.name!=="pollito.png")
+.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+
+imgs.forEach((f,i)=>{
+const img=document.createElement("img");
+img.src=f.download_url;
+
+img.onclick=()=>{
+abrirModal(img.src);
+crearCorazon();
+};
+
+galeria.appendChild(img);
+
+/* MENSAJE CADA 6 */
+if((i+1)%6===0){
+const m=mensajes[Math.floor(i/6)];
+if(m){
+const div=document.createElement("div");
+div.className="mensaje";
+div.innerText=m;
+galeria.appendChild(div);
+}
+}
+});
 });
 
-/* SOBRE */
+/* MODAL */
+const modal=document.getElementById("modal");
+const modalImg=document.getElementById("modalImg");
+
+function abrirModal(src){
+modal.style.display="flex";
+modalImg.src=src;
+}
+modal.onclick=()=>modal.style.display="none";
+
+/* CORAZONES */
+function crearCorazon(){
+const c=document.createElement("div");
+c.innerText="❤️";
+c.style.position="fixed";
+c.style.left=Math.random()*100+"%";
+c.style.bottom="0";
+c.style.fontSize="20px";
+c.style.animation="subir 2s linear";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),2000);
+}
+
+const style=document.createElement("style");
+style.innerHTML="@keyframes subir{to{transform:translateY(-200px);opacity:0}}";
+document.head.appendChild(style);
+
+/* ESTRELLAS */
+setInterval(()=>{
+const s=document.createElement("div");
+s.className="star";
+s.innerText="✨";
+s.style.left=Math.random()*100+"%";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),10000);
+},800);
+
+/* CARTA */
 const sobre=document.getElementById("sobre");
 const cartaTexto=document.getElementById("cartaTexto");
-const abrirCarta=document.getElementById("abrirCarta");
 
-const mensajeCarta="Mi amor… desde que llegaste a mi vida todo cambió. agradezco al destino por haber entrelazado nuestros caminos.. Te Amo Mucho Mas De Lo Que Imaginas 🐥❤️";
+const textoCarta=`Mi amor… no fue planeado, pero llegaste y cambiaste todo.
+Hoy puedo decir que eres mi paz en medio de todo, mi alegría en los días simples…
+y la persona con la que quiero seguir escribiendo esta historia 🐥❤️`;
+
 let ci=0;
 
 function escribirCarta(){
-  if(ci<mensajeCarta.length){
-    cartaTexto.innerHTML+=mensajeCarta[ci++];
-    setTimeout(escribirCarta,40);
-  }
+if(ci<textoCarta.length){
+cartaTexto.innerHTML+=textoCarta[ci++];
+setTimeout(escribirCarta,40);
+}
 }
 
-sobre.addEventListener("click",()=>{
-  sobre.classList.add("abierto");
-});
+sobre.onclick=()=>sobre.classList.add("abierto");
 
-abrirCarta.addEventListener("click",(e)=>{
-  e.stopPropagation();
-  escribirCarta();
-});
-</script>  
+document.getElementById("abrirCarta").onclick=(e)=>{
+e.stopPropagation();
+escribirCarta();
+};
 
-</body>  
+</script>
+
+</body>
 </html>
