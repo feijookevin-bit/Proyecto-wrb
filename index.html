@@ -5,33 +5,64 @@
 <title>Nuestra historia 🐥❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 body{
 margin:0;
-font-family:'Great Vibes',cursive;
+font-family:'Poppins',sans-serif;
 background:linear-gradient(to bottom,#0a0a0a,#1a1a1a);
 color:#ff6b81;
 text-align:center;
 overflow-x:hidden;
 }
 
+/* VIDEO */
+#video-bg{
+position:fixed;
+width:100%;height:100%;
+object-fit:cover;
+z-index:-2;
+opacity:.25;
+}
+
 /* INTRO */
 #intro{
 position:fixed;
-width:100%;
-height:100%;
+width:100%;height:100%;
 background:black;
 display:flex;
 justify-content:center;
 align-items:center;
 z-index:9999;
+transition:opacity 1.5s;
 }
-#introText{font-size:2em;color:#ff6b81}
+#introText{
+font-family:'Great Vibes',cursive;
+font-size:2em;
+color:#ff6b81;
+opacity:0;
+transition:opacity 1s;
+}
+
+/* TITULOS */
+h1{font-size:2.5em;margin-top:40px;}
+h2{font-family:'Great Vibes';font-size:2em;}
+
+.presentacion{
+font-size:1.1em;
+color:#ffb3c1;
+margin-top:10px;
+}
 
 /* CONTADOR */
-#contador{margin-top:20px;font-size:1.5em}
+.card{
+background:#141414;
+margin:20px;
+padding:20px;
+border-radius:15px;
+}
+#contador{font-size:1.2em;}
 
 /* GALERIA */
 .galeria{
@@ -46,48 +77,33 @@ height:140px;
 object-fit:cover;
 border-radius:12px;
 cursor:pointer;
-transition:.4s;
 animation:brillo 3s infinite alternate;
 }
-.galeria img:hover{
-transform:scale(1.1);
-box-shadow:0 0 20px rgba(255,107,129,0.8);
-}
-
-/* BRILLO */
 @keyframes brillo{
-from{box-shadow:0 0 10px rgba(255,107,129,0.2)}
-to{box-shadow:0 0 25px rgba(255,107,129,0.6)}
+from{box-shadow:0 0 10px rgba(255,107,129,.2)}
+to{box-shadow:0 0 25px rgba(255,107,129,.7)}
 }
 
-/* MENSAJES */
 .mensaje{
 grid-column:1/-1;
-font-size:1.3em;
 color:#ffb3c1;
+margin:10px;
 }
 
-/* MODAL CINEMÁTICO */
+/* MODAL */
 #modal{
 display:none;
 position:fixed;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.95);
+width:100%;height:100%;
+background:rgba(0,0,0,.9);
 justify-content:center;
 align-items:center;
 z-index:9999;
-overflow:hidden;
 }
 #modal img{
 max-width:90%;
 max-height:90%;
 border-radius:12px;
-animation:cine 10s ease-in-out infinite alternate;
-}
-@keyframes cine{
-0%{transform:scale(1)}
-100%{transform:scale(1.1)}
 }
 
 /* SOBRE */
@@ -101,95 +117,118 @@ perspective:1000px;
 #sobre::before{
 content:"Tócame 💖";
 position:absolute;
-width:100%;
-height:100%;
+width:100%;height:100%;
 background:#ff6b81;
-border-radius:10px;
+border-radius:12px;
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 color:white;
-box-shadow:0 0 25px rgba(255,107,129,0.5);
+font-size:1.2em;
+box-shadow:0 0 25px rgba(255,107,129,.5);
 }
+
+/* tapa */
 .tapa{
 position:absolute;
-width:100%;
-height:100%;
-background:#ff4d6d;
+width:100%;height:100%;
+background:#e84c6a;
 clip-path:polygon(0 0,100% 0,50% 60%);
 transform-origin:top;
 transition:1s;
 }
+
+/* carta */
 .carta{
 position:absolute;
 width:85%;
 top:10%;
 left:7.5%;
-background:rgba(255,255,255,0.08);
-border-radius:12px;
+background:white;
+color:#333;
+border-radius:10px;
 padding:20px;
 transform:translateY(60px);
 opacity:0;
 transition:1s;
+text-align:left;
+line-height:1.5;
 }
-#sobre.abierto .tapa{transform:rotateX(180deg)}
+
+/* abrir */
+#sobre.abierto .tapa{transform:rotateX(180deg);}
 #sobre.abierto .carta{
 transform:translateY(0);
 opacity:1;
 }
-#abrirCarta{
-margin-top:10px;
-border:1px solid #ff6b81;
-padding:5px 15px;
-border-radius:20px;
-cursor:pointer;
+
+/* footer final */
+.final{
+margin:40px;
+font-size:1.2em;
+position:relative;
+}
+.final::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
+animation:brilloFinal 3s infinite;
+}
+@keyframes brilloFinal{
+100%{left:100%;}
 }
 
-/* POLLITO */
+/* pollito */
 #pollito{
 width:120px;
-margin-top:20px;
 animation:latido 1.5s infinite;
 }
 @keyframes latido{
-50%{transform:scale(1.1)}
-}
-
-/* ESTRELLAS */
-.star{
-position:fixed;
-color:white;
-opacity:0.2;
-animation:flotar 10s linear infinite;
-}
-@keyframes flotar{
-0%{transform:translateY(0)}
-100%{transform:translateY(-100vh)}
+50%{transform:scale(1.1);}
 }
 </style>
 </head>
 
 <body>
 
+<video autoplay loop muted id="video-bg">
+<source src="viento.mp4">
+</video>
+
 <div id="intro"><h1 id="introText"></h1></div>
 
 <h1>Nuestra historia</h1>
 <h2>✨ Katherine ✨</h2>
 
+<div class="presentacion">
+Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖
+</div>
+
+<div class="card">
+<h3>⏳ Nuestro tiempo juntos ⌛</h3>
 <div id="contador"></div>
+</div>
 
 <div class="galeria" id="galeria"></div>
 
 <footer>
+
 <div id="sobre">
 <div class="tapa"></div>
-<div class="carta">
-<p id="cartaTexto"></p>
-<div id="abrirCarta">abrir 💌</div>
-</div>
+<div class="carta" id="cartaTexto"></div>
 </div>
 
 <img id="pollito" src="fotos/pollito.png">
+
+<div class="final">
+✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨  
+<br>y si la vida me diera a elegir... Te elegiría de nuevo una y mil veces 💖
+</div>
+
 </footer>
 
 <div id="modal"><img id="modalImg"></div>
@@ -197,18 +236,20 @@ animation:flotar 10s linear infinite;
 <script>
 
 /* INTRO */
-const textos=[
-"Hay historias que no se planean…",
-"pero llegan para cambiarlo todo…",
-"y tú… eres la mía 🐥❤️"
-];
-let ti=0;
+const textos=["Hay historias que no se planean…","pero llegan para cambiarlo todo…","y tú… eres la mía 🐥❤️"];
+let i=0;
 function introAnim(){
-if(ti<textos.length){
-document.getElementById("introText").innerText=textos[ti++];
+const el=document.getElementById("introText");
+if(i<textos.length){
+el.style.opacity=0;
+setTimeout(()=>{
+el.innerText=textos[i++];
+el.style.opacity=1;
 setTimeout(introAnim,2500);
+},800);
 }else{
-document.getElementById("intro").remove();
+document.getElementById("intro").style.opacity=0;
+setTimeout(()=>document.getElementById("intro").remove(),1500);
 }
 }
 introAnim();
@@ -218,51 +259,40 @@ const inicio=new Date("2025-10-13");
 setInterval(()=>{
 const ahora=new Date();
 const diff=ahora-inicio;
-
-const d=Math.floor(diff/(1000*60*60*24));
-const h=Math.floor(diff/(1000*60*60)%24);
-const m=Math.floor(diff/(1000*60)%60);
-const s=Math.floor(diff/1000%60);
-
+const d=Math.floor(diff/86400000);
+const h=Math.floor(diff/3600000)%24;
+const m=Math.floor(diff/60000)%60;
+const s=Math.floor(diff/1000)%60;
 document.getElementById("contador").innerHTML=
-`Desde que empezó lo nuestro 💖<br>${d} días ${h}h ${m}m ${s}s`;
+`${d} días ${h}h ${m}m ${s}s 💖`;
 },1000);
 
 /* MENSAJES */
 const mensajes=[
-"lo repetiría mil veces",
+" lo repetiría mil veces",
 "No sé cómo haces pero siempre me arreglas el día",
-"uff… me gustas demasiado",
+" uff… me gustas demasiado",
 "Contigo todo se siente de película",
-"Te Adoro Mi Princesa",
+" Te Adoro Mi Princesa",
 "No es la foto… eres tú en ella",
 "Literal, mi lugar favorito eres tú",
 "Siempre termino sonriendo cuando veo nuestras historias"
 ];
 
-/* GALERIA AUTOMATICA + ORDEN */
+/* GALERIA AUTOMATICA */
+fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos")
+.then(r=>r.json())
+.then(data=>{
 const galeria=document.getElementById("galeria");
 
-fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos")
-.then(res=>res.json())
-.then(data=>{
-
-const imgs=data
-.filter(f=>f.type==="file" && /\.(jpg|png|jpeg|webp)$/i.test(f.name) && f.name!=="pollito.png")
-.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+const imgs=data.filter(f=>/\.(jpg|png|jpeg|webp)$/i.test(f.name) && f.name!=="pollito.png");
 
 imgs.forEach((f,i)=>{
 const img=document.createElement("img");
 img.src=f.download_url;
-
-img.onclick=()=>{
-abrirModal(img.src);
-crearCorazon();
-};
-
+img.onclick=()=>abrirModal(img.src);
 galeria.appendChild(img);
 
-/* MENSAJE CADA 6 */
 if((i+1)%6===0){
 const m=mensajes[Math.floor(i/6)];
 if(m){
@@ -276,65 +306,48 @@ galeria.appendChild(div);
 });
 
 /* MODAL */
-const modal=document.getElementById("modal");
-const modalImg=document.getElementById("modalImg");
-
 function abrirModal(src){
+const modal=document.getElementById("modal");
+document.getElementById("modalImg").src=src;
 modal.style.display="flex";
-modalImg.src=src;
-}
 modal.onclick=()=>modal.style.display="none";
-
-/* CORAZONES */
-function crearCorazon(){
-const c=document.createElement("div");
-c.innerText="❤️";
-c.style.position="fixed";
-c.style.left=Math.random()*100+"%";
-c.style.bottom="0";
-c.style.fontSize="20px";
-c.style.animation="subir 2s linear";
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),2000);
 }
 
-const style=document.createElement("style");
-style.innerHTML="@keyframes subir{to{transform:translateY(-200px);opacity:0}}";
-document.head.appendChild(style);
-
-/* ESTRELLAS */
-setInterval(()=>{
-const s=document.createElement("div");
-s.className="star";
-s.innerText="✨";
-s.style.left=Math.random()*100+"%";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),10000);
-},800);
-
-/* CARTA */
-const sobre=document.getElementById("sobre");
-const cartaTexto=document.getElementById("cartaTexto");
-
+/* SOBRE */
 const textoCarta=`Mi amor… no fue planeado, pero llegaste y cambiaste todo.
 Hoy puedo decir que eres mi paz en medio de todo, mi alegría en los días simples…
 y la persona con la que quiero seguir escribiendo esta historia 🐥❤️`;
 
 let ci=0;
-
 function escribirCarta(){
+const el=document.getElementById("cartaTexto");
 if(ci<textoCarta.length){
-cartaTexto.innerHTML+=textoCarta[ci++];
+el.innerHTML+=textoCarta[ci++];
 setTimeout(escribirCarta,40);
 }
 }
 
-sobre.onclick=()=>sobre.classList.add("abierto");
-
-document.getElementById("abrirCarta").onclick=(e)=>{
-e.stopPropagation();
-escribirCarta();
+document.getElementById("sobre").onclick=()=>{
+document.getElementById("sobre").classList.add("abierto");
+setTimeout(escribirCarta,600);
 };
+
+/* CORAZONES */
+setInterval(()=>{
+const c=document.createElement("div");
+c.innerText=["💖","🐥"][Math.floor(Math.random()*2)];
+c.style.position="fixed";
+c.style.left=Math.random()*100+"%";
+c.style.bottom="0";
+c.style.fontSize="20px";
+c.style.transition="transform 6s linear, opacity 6s";
+document.body.appendChild(c);
+setTimeout(()=>{
+c.style.transform="translateY(-120vh)";
+c.style.opacity="0";
+},50);
+setTimeout(()=>c.remove(),6000);
+},1200);
 
 </script>
 
