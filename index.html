@@ -12,23 +12,20 @@ body{
 margin:0;
 font-family:'Poppins',sans-serif;
 background:linear-gradient(to bottom,#0a0a0a,#1a1a1a);
-color:#ff6b81;
+color:#ffd1dc;
 text-align:center;
 overflow-x:hidden;
 }
 
-/* VIDEO */
-#video-bg{
-position:fixed;
-width:100%;height:100%;
-object-fit:cover;
-z-index:-2;
-opacity:.25;
+/* NEON SUAVE */
+.neon{
+text-shadow:0 0 5px #ff6b81,0 0 10px rgba(255,107,129,.5);
 }
 
 /* INTRO */
 #intro{
 position:fixed;
+top:0;left:0;
 width:100%;height:100%;
 background:black;
 display:flex;
@@ -39,20 +36,22 @@ transition:opacity 1.5s;
 }
 #introText{
 font-family:'Great Vibes',cursive;
-font-size:2em;
+font-size:2.2em;
 color:#ff6b81;
 opacity:0;
 transition:opacity 1s;
+text-align:center;
 }
 
 /* TITULOS */
-h1{font-size:2.5em;margin-top:40px;}
+h1{font-family:'Great Vibes';font-size:3em;margin-top:40px;}
 h2{font-family:'Great Vibes';font-size:2em;}
 
+/* TEXTO */
 .presentacion{
 font-size:1.1em;
-color:#ffb3c1;
 margin-top:10px;
+color:#ffb3c1;
 }
 
 /* CONTADOR */
@@ -61,8 +60,8 @@ background:#141414;
 margin:20px;
 padding:20px;
 border-radius:15px;
+box-shadow:0 0 15px rgba(255,107,129,.2);
 }
-#contador{font-size:1.2em;}
 
 /* GALERIA */
 .galeria{
@@ -77,17 +76,30 @@ height:140px;
 object-fit:cover;
 border-radius:12px;
 cursor:pointer;
-animation:brillo 3s infinite alternate;
+transition:all .5s cubic-bezier(0.22,1,0.36,1);
+opacity:0;
+transform:translateY(20px);
 }
-@keyframes brillo{
-from{box-shadow:0 0 10px rgba(255,107,129,.2)}
-to{box-shadow:0 0 25px rgba(255,107,129,.7)}
+.galeria img.visible{
+opacity:1;
+transform:translateY(0);
+}
+.galeria img:hover{
+transform:scale(1.08);
+box-shadow:0 0 20px rgba(255,107,129,.6);
 }
 
 .mensaje{
 grid-column:1/-1;
 color:#ffb3c1;
 margin:10px;
+opacity:0;
+transform:translateY(20px);
+transition:.6s;
+}
+.mensaje.visible{
+opacity:1;
+transform:translateY(0);
 }
 
 /* MODAL */
@@ -104,6 +116,11 @@ z-index:9999;
 max-width:90%;
 max-height:90%;
 border-radius:12px;
+animation:zoom .4s;
+}
+@keyframes zoom{
+from{transform:scale(.8);opacity:0}
+to{transform:scale(1);opacity:1}
 }
 
 /* SOBRE */
@@ -112,97 +129,95 @@ position:relative;
 width:280px;
 height:180px;
 margin:60px auto;
-perspective:1000px;
+cursor:pointer;
+transition:.4s;
 }
-#sobre::before{
-content:"Tócame 💖";
+#sobre:hover{
+transform:translateY(-5px);
+}
+
+.texto-sobre{
 position:absolute;
-width:100%;height:100%;
-background:#ff6b81;
-border-radius:12px;
+width:100%;
+height:100%;
 display:flex;
 justify-content:center;
 align-items:center;
+z-index:3;
 color:white;
-font-size:1.2em;
-box-shadow:0 0 25px rgba(255,107,129,.5);
 }
 
-/* tapa */
 .tapa{
 position:absolute;
-width:100%;height:100%;
-background:#e84c6a;
+width:100%;
+height:100%;
+background:#ff6b81;
 clip-path:polygon(0 0,100% 0,50% 60%);
 transform-origin:top;
 transition:1s;
+z-index:2;
 }
 
-/* carta */
+.base{
+position:absolute;
+width:100%;
+height:100%;
+background:#ff4d6d;
+border-radius:12px;
+}
+
+/* CARTA */
 .carta{
 position:absolute;
 width:85%;
 top:10%;
 left:7.5%;
-background:white;
+background:#fffaf5;
 color:#333;
 border-radius:10px;
-padding:20px;
-transform:translateY(60px);
+padding:25px;
+transform:translateY(60px) scale(.95);
 opacity:0;
 transition:1s;
 text-align:left;
-line-height:1.5;
+line-height:1.6;
+box-shadow:0 0 15px rgba(0,0,0,.2);
+border:2px solid #ffd1dc;
 }
 
-/* abrir */
-#sobre.abierto .tapa{transform:rotateX(180deg);}
+/* ABRIR */
+#sobre.abierto .tapa{
+transform:rotateX(180deg);
+}
 #sobre.abierto .carta{
-transform:translateY(0);
+transform:translateY(0) scale(1);
 opacity:1;
 }
 
-/* footer final */
+/* FINAL */
 .final{
 margin:40px;
-font-size:1.2em;
-position:relative;
-}
-.final::after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:100%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
-animation:brilloFinal 3s infinite;
-}
-@keyframes brilloFinal{
-100%{left:100%;}
+font-family:'Great Vibes';
+font-size:1.6em;
 }
 
-/* pollito */
+/* POLLITO */
 #pollito{
 width:120px;
-animation:latido 1.5s infinite;
+animation:float 3s ease-in-out infinite;
 }
-@keyframes latido{
-50%{transform:scale(1.1);}
+@keyframes float{
+50%{transform:translateY(-8px);}
 }
 </style>
 </head>
 
 <body>
 
-<video autoplay loop muted id="video-bg">
-<source src="viento.mp4">
-</video>
-
 <div id="intro"><h1 id="introText"></h1></div>
 
-<h1>Nuestra historia</h1>
-<h2>✨ Katherine ✨</h2>
+<h1 class="neon">Nuestra historia</h1>
+<h2 class="neon">✨ Katherine ✨</h2>
 
 <div class="presentacion">
 Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖
@@ -218,13 +233,15 @@ Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖
 <footer>
 
 <div id="sobre">
+<div class="texto-sobre">Tócame 💖</div>
 <div class="tapa"></div>
+<div class="base"></div>
 <div class="carta" id="cartaTexto"></div>
 </div>
 
 <img id="pollito" src="fotos/pollito.png">
 
-<div class="final">
+<div class="final neon">
 ✨ Te Amo Mucho Mi Pollito Chitito Eres Lo Mejor De Mi Vida ❤️ ✨  
 <br>y si la vida me diera a elegir... Te elegiría de nuevo una y mil veces 💖
 </div>
@@ -235,7 +252,7 @@ Aquí quedarán plasmadas nuestras historias y mejores momentos vividos 💖
 
 <script>
 
-/* INTRO */
+/* INTRO SUAVE */
 const textos=["Hay historias que no se planean…","pero llegan para cambiarlo todo…","y tú… eres la mía 🐥❤️"];
 let i=0;
 function introAnim(){
@@ -269,17 +286,17 @@ document.getElementById("contador").innerHTML=
 
 /* MENSAJES */
 const mensajes=[
-" lo repetiría mil veces",
+"lo repetiría mil veces",
 "No sé cómo haces pero siempre me arreglas el día",
-" uff… me gustas demasiado",
+"uff… me gustas demasiado",
 "Contigo todo se siente de película",
-" Te Adoro Mi Princesa",
+"Te Adoro Mi Princesa",
 "No es la foto… eres tú en ella",
 "Literal, mi lugar favorito eres tú",
 "Siempre termino sonriendo cuando veo nuestras historias"
 ];
 
-/* GALERIA AUTOMATICA */
+/* GALERIA */
 fetch("https://api.github.com/repos/feijookevin-bit/Proyecto-wrb/contents/fotos")
 .then(r=>r.json())
 .then(data=>{
@@ -290,6 +307,9 @@ const imgs=data.filter(f=>/\.(jpg|png|jpeg|webp)$/i.test(f.name) && f.name!=="po
 imgs.forEach((f,i)=>{
 const img=document.createElement("img");
 img.src=f.download_url;
+
+setTimeout(()=>img.classList.add("visible"),100*i);
+
 img.onclick=()=>abrirModal(img.src);
 galeria.appendChild(img);
 
@@ -299,6 +319,7 @@ if(m){
 const div=document.createElement("div");
 div.className="mensaje";
 div.innerText=m;
+setTimeout(()=>div.classList.add("visible"),100*i);
 galeria.appendChild(div);
 }
 }
@@ -313,7 +334,7 @@ modal.style.display="flex";
 modal.onclick=()=>modal.style.display="none";
 }
 
-/* SOBRE */
+/* CARTA */
 const textoCarta=`Mi amor… no fue planeado, pero llegaste y cambiaste todo.
 Hoy puedo decir que eres mi paz en medio de todo, mi alegría en los días simples…
 y la persona con la que quiero seguir escribiendo esta historia 🐥❤️`;
@@ -323,7 +344,7 @@ function escribirCarta(){
 const el=document.getElementById("cartaTexto");
 if(ci<textoCarta.length){
 el.innerHTML+=textoCarta[ci++];
-setTimeout(escribirCarta,40);
+setTimeout(escribirCarta,30 + Math.random()*40);
 }
 }
 
