@@ -172,7 +172,13 @@ position:absolute;
 width:85%;
 top:10%;
 left:7.5%;
-background:#fffaf5;
+
+background:
+linear-gradient(white, white) padding-box,
+linear-gradient(45deg,#ffccd5,#ff6b81) border-box;
+
+border:3px solid transparent;
+
 color:#333;
 border-radius:10px;
 padding:25px;
@@ -182,9 +188,7 @@ transition:1s;
 text-align:left;
 line-height:1.6;
 box-shadow:0 0 15px rgba(0,0,0,.2);
-border:2px solid #ffd1dc;
 }
-
 /* ABRIR */
 #sobre.abierto .tapa{
 transform:rotateX(180deg);
@@ -340,19 +344,25 @@ Hoy puedo decir que eres mi paz en medio de todo, mi alegría en los días simpl
 y la persona con la que quiero seguir escribiendo esta historia 🐥❤️`;
 
 let ci=0;
+
 function escribirCarta(){
-const el=document.getElementById("cartaTexto");
-if(ci<textoCarta.length){
-el.innerHTML+=textoCarta[ci++];
-setTimeout(escribirCarta,30 + Math.random()*40);
+  const el=document.getElementById("cartaTexto");
+
+  if(ci<textoCarta.length){
+    el.innerHTML+=textoCarta[ci++];
+    setTimeout(escribirCarta,30 + Math.random()*40);
+  }
 }
-}
+
+let cartaAbierta = false;
 
 document.getElementById("sobre").onclick=()=>{
-document.getElementById("sobre").classList.add("abierto");
-setTimeout(escribirCarta,600);
-};
+  if(cartaAbierta) return;
 
+  cartaAbierta = true;
+  document.getElementById("sobre").classList.add("abierto");
+  setTimeout(escribirCarta,600);
+};
 
 /* 🌫️ 70% POLVO DE LUZ */
 setInterval(()=>{
